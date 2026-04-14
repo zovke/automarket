@@ -1,0 +1,53 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  role      Role     @default(USER)
+  createdAt DateTime @default(now())
+
+  listings  Listing[]
+}
+
+model Listing {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  price       Float
+  category    Category
+  
+  // Araç özellikleri (Yedek parça için opsiyonel)
+  brand        String?
+  model        String?
+  year         Int?
+  kilometers   Int?
+  fuel         String?
+  transmission String?
+  images       String?
+  isAvailable  Boolean  @default(true)
+
+  createdAt   DateTime @default(now())
+
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum Category {
+  SALE
+  RENT
+  PART
+}
