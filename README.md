@@ -27,6 +27,12 @@ Türkiye'nin modern, dinamik ve yenilikçi araç & yedek parça ilan platformu. 
   - **İlan Yönetimi:** Eklenen her ilanın listelenmesi ve admin üzerinden kontrol edilebilir altyapı paneli hazırlandı.
 - [x] **Arayüz Entegrasyonu:**
   - Anasayfa listelemeleri ve `/arac/[id]` detay sayfaları veritabanında yer alan `Listing` modeli ile uyumlu hale getirildi.
+- [x] **Favoriler Sistemi (Veritabanı Destekli):**
+  - Favori ekleme ve çıkarma yeteneği Context API ile birlikte veritabanı (`Favorite` modeli) entegrasyonuyla güvenceye alındı.
+- [x] **Fotoğraf ve Dosya Yükleme (Upload):**
+  - İlan oluşturma/düzenleme formuna sürükle-bırak (drag-and-drop) destekli, önizlemeli ve silme özellikli modern görsel yükleme alanı eklendi. Yüklenen dosyalar güvenli bir API aracılığıyla sunucuya kaydedilmektedir.
+- [x] **Next.js Görsel Filtreleme Hata Çözümü:**
+  - Veritabanındaki eski/geçersiz görsel yolu veya yerel dosya yolu dizilimlerinin Next.js `<Image>` bileşenini çökertmesini önlemek için yol doğrulama filtresi entegre edildi.
 
 ---
 
@@ -38,11 +44,7 @@ Uygulamanın vizyonunu tamamlamak ve fonksiyonel bir pazara dönüştürmek içi
    - Normal `USER` yetkisindeki kullanıcıların site üzerinden araç / kiralık araç / yedek parça ilanı verebilmesi için form oluşturulması.
 2. **Gelişmiş Filtreleme ve Arama Sistemi**
    - Anasayfada Marka, Model, Vites, Yakıt ve Fiyat Aralığına göre dinamik Prisma sorgularıyla arama yapılması.
-3. **Favoriler Sistemini Veritabanına Taşıma**
-   - Şu anda Context API (Client-Side) ile çalışan Favori Ekle/Çıkar yeteneğinin, kayıtlı kullanıcılar için veritabanında saklanması.
-4. **Fotoğraf ve Dosya Yükleme (Upload)**
-   - Yeni ilan eklerken kullanıcıların fotoğraf yükleyebilmesi (Cloudinary veya AWS S3 entegrasyonu).
-5. **Mesajlaşma ve Satıcıyla İletişim**
+3. **Mesajlaşma ve Satıcıyla İletişim**
    - İlan detay sayfasından güvenli bir şekilde satıcıyla mail/uygulama-içi sohbet yapılması.
 
 ---
