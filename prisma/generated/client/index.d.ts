@@ -23,6 +23,16 @@ export type User = $Result.DefaultSelection<Prisma.$UserPayload>
  * 
  */
 export type Listing = $Result.DefaultSelection<Prisma.$ListingPayload>
+/**
+ * Model Request
+ * 
+ */
+export type Request = $Result.DefaultSelection<Prisma.$RequestPayload>
+/**
+ * Model Favorite
+ * 
+ */
+export type Favorite = $Result.DefaultSelection<Prisma.$FavoritePayload>
 
 /**
  * Enums
@@ -196,6 +206,26 @@ export class PrismaClient<
     * ```
     */
   get listing(): Prisma.ListingDelegate<ExtArgs>;
+
+  /**
+   * `prisma.request`: Exposes CRUD operations for the **Request** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Requests
+    * const requests = await prisma.request.findMany()
+    * ```
+    */
+  get request(): Prisma.RequestDelegate<ExtArgs>;
+
+  /**
+   * `prisma.favorite`: Exposes CRUD operations for the **Favorite** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Favorites
+    * const favorites = await prisma.favorite.findMany()
+    * ```
+    */
+  get favorite(): Prisma.FavoriteDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -638,7 +668,9 @@ export namespace Prisma {
 
   export const ModelName: {
     User: 'User',
-    Listing: 'Listing'
+    Listing: 'Listing',
+    Request: 'Request',
+    Favorite: 'Favorite'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -654,7 +686,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "user" | "listing"
+      modelProps: "user" | "listing" | "request" | "favorite"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -795,6 +827,146 @@ export namespace Prisma {
           count: {
             args: Prisma.ListingCountArgs<ExtArgs>
             result: $Utils.Optional<ListingCountAggregateOutputType> | number
+          }
+        }
+      }
+      Request: {
+        payload: Prisma.$RequestPayload<ExtArgs>
+        fields: Prisma.RequestFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.RequestFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RequestPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.RequestFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RequestPayload>
+          }
+          findFirst: {
+            args: Prisma.RequestFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RequestPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.RequestFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RequestPayload>
+          }
+          findMany: {
+            args: Prisma.RequestFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RequestPayload>[]
+          }
+          create: {
+            args: Prisma.RequestCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RequestPayload>
+          }
+          createMany: {
+            args: Prisma.RequestCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.RequestCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RequestPayload>[]
+          }
+          delete: {
+            args: Prisma.RequestDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RequestPayload>
+          }
+          update: {
+            args: Prisma.RequestUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RequestPayload>
+          }
+          deleteMany: {
+            args: Prisma.RequestDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.RequestUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.RequestUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RequestPayload>
+          }
+          aggregate: {
+            args: Prisma.RequestAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateRequest>
+          }
+          groupBy: {
+            args: Prisma.RequestGroupByArgs<ExtArgs>
+            result: $Utils.Optional<RequestGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.RequestCountArgs<ExtArgs>
+            result: $Utils.Optional<RequestCountAggregateOutputType> | number
+          }
+        }
+      }
+      Favorite: {
+        payload: Prisma.$FavoritePayload<ExtArgs>
+        fields: Prisma.FavoriteFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.FavoriteFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FavoritePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.FavoriteFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FavoritePayload>
+          }
+          findFirst: {
+            args: Prisma.FavoriteFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FavoritePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.FavoriteFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FavoritePayload>
+          }
+          findMany: {
+            args: Prisma.FavoriteFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FavoritePayload>[]
+          }
+          create: {
+            args: Prisma.FavoriteCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FavoritePayload>
+          }
+          createMany: {
+            args: Prisma.FavoriteCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.FavoriteCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FavoritePayload>[]
+          }
+          delete: {
+            args: Prisma.FavoriteDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FavoritePayload>
+          }
+          update: {
+            args: Prisma.FavoriteUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FavoritePayload>
+          }
+          deleteMany: {
+            args: Prisma.FavoriteDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.FavoriteUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.FavoriteUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FavoritePayload>
+          }
+          aggregate: {
+            args: Prisma.FavoriteAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateFavorite>
+          }
+          groupBy: {
+            args: Prisma.FavoriteGroupByArgs<ExtArgs>
+            result: $Utils.Optional<FavoriteGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.FavoriteCountArgs<ExtArgs>
+            result: $Utils.Optional<FavoriteCountAggregateOutputType> | number
           }
         }
       }
@@ -960,10 +1132,14 @@ export namespace Prisma {
 
   export type UserCountOutputType = {
     listings: number
+    requests: number
+    favorites: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     listings?: boolean | UserCountOutputTypeCountListingsArgs
+    requests?: boolean | UserCountOutputTypeCountRequestsArgs
+    favorites?: boolean | UserCountOutputTypeCountFavoritesArgs
   }
 
   // Custom InputTypes
@@ -984,6 +1160,60 @@ export namespace Prisma {
     where?: ListingWhereInput
   }
 
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountRequestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RequestWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountFavoritesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FavoriteWhereInput
+  }
+
+
+  /**
+   * Count Type ListingCountOutputType
+   */
+
+  export type ListingCountOutputType = {
+    requests: number
+    favorites: number
+  }
+
+  export type ListingCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    requests?: boolean | ListingCountOutputTypeCountRequestsArgs
+    favorites?: boolean | ListingCountOutputTypeCountFavoritesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ListingCountOutputType without action
+   */
+  export type ListingCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ListingCountOutputType
+     */
+    select?: ListingCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ListingCountOutputType without action
+   */
+  export type ListingCountOutputTypeCountRequestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RequestWhereInput
+  }
+
+  /**
+   * ListingCountOutputType without action
+   */
+  export type ListingCountOutputTypeCountFavoritesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FavoriteWhereInput
+  }
+
 
   /**
    * Models
@@ -1001,6 +1231,8 @@ export namespace Prisma {
 
   export type UserMinAggregateOutputType = {
     id: string | null
+    firstName: string | null
+    lastName: string | null
     email: string | null
     password: string | null
     role: $Enums.Role | null
@@ -1009,6 +1241,8 @@ export namespace Prisma {
 
   export type UserMaxAggregateOutputType = {
     id: string | null
+    firstName: string | null
+    lastName: string | null
     email: string | null
     password: string | null
     role: $Enums.Role | null
@@ -1017,6 +1251,8 @@ export namespace Prisma {
 
   export type UserCountAggregateOutputType = {
     id: number
+    firstName: number
+    lastName: number
     email: number
     password: number
     role: number
@@ -1027,6 +1263,8 @@ export namespace Prisma {
 
   export type UserMinAggregateInputType = {
     id?: true
+    firstName?: true
+    lastName?: true
     email?: true
     password?: true
     role?: true
@@ -1035,6 +1273,8 @@ export namespace Prisma {
 
   export type UserMaxAggregateInputType = {
     id?: true
+    firstName?: true
+    lastName?: true
     email?: true
     password?: true
     role?: true
@@ -1043,6 +1283,8 @@ export namespace Prisma {
 
   export type UserCountAggregateInputType = {
     id?: true
+    firstName?: true
+    lastName?: true
     email?: true
     password?: true
     role?: true
@@ -1124,6 +1366,8 @@ export namespace Prisma {
 
   export type UserGroupByOutputType = {
     id: string
+    firstName: string | null
+    lastName: string | null
     email: string
     password: string
     role: $Enums.Role
@@ -1149,16 +1393,22 @@ export namespace Prisma {
 
   export type UserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    firstName?: boolean
+    lastName?: boolean
     email?: boolean
     password?: boolean
     role?: boolean
     createdAt?: boolean
     listings?: boolean | User$listingsArgs<ExtArgs>
+    requests?: boolean | User$requestsArgs<ExtArgs>
+    favorites?: boolean | User$favoritesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    firstName?: boolean
+    lastName?: boolean
     email?: boolean
     password?: boolean
     role?: boolean
@@ -1167,6 +1417,8 @@ export namespace Prisma {
 
   export type UserSelectScalar = {
     id?: boolean
+    firstName?: boolean
+    lastName?: boolean
     email?: boolean
     password?: boolean
     role?: boolean
@@ -1175,6 +1427,8 @@ export namespace Prisma {
 
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     listings?: boolean | User$listingsArgs<ExtArgs>
+    requests?: boolean | User$requestsArgs<ExtArgs>
+    favorites?: boolean | User$favoritesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1183,9 +1437,13 @@ export namespace Prisma {
     name: "User"
     objects: {
       listings: Prisma.$ListingPayload<ExtArgs>[]
+      requests: Prisma.$RequestPayload<ExtArgs>[]
+      favorites: Prisma.$FavoritePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
+      firstName: string | null
+      lastName: string | null
       email: string
       password: string
       role: $Enums.Role
@@ -1555,6 +1813,8 @@ export namespace Prisma {
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     listings<T extends User$listingsArgs<ExtArgs> = {}>(args?: Subset<T, User$listingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ListingPayload<ExtArgs>, T, "findMany"> | Null>
+    requests<T extends User$requestsArgs<ExtArgs> = {}>(args?: Subset<T, User$requestsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RequestPayload<ExtArgs>, T, "findMany"> | Null>
+    favorites<T extends User$favoritesArgs<ExtArgs> = {}>(args?: Subset<T, User$favoritesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FavoritePayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1585,6 +1845,8 @@ export namespace Prisma {
    */ 
   interface UserFieldRefs {
     readonly id: FieldRef<"User", 'String'>
+    readonly firstName: FieldRef<"User", 'String'>
+    readonly lastName: FieldRef<"User", 'String'>
     readonly email: FieldRef<"User", 'String'>
     readonly password: FieldRef<"User", 'String'>
     readonly role: FieldRef<"User", 'Role'>
@@ -1923,6 +2185,46 @@ export namespace Prisma {
   }
 
   /**
+   * User.requests
+   */
+  export type User$requestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Request
+     */
+    select?: RequestSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RequestInclude<ExtArgs> | null
+    where?: RequestWhereInput
+    orderBy?: RequestOrderByWithRelationInput | RequestOrderByWithRelationInput[]
+    cursor?: RequestWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RequestScalarFieldEnum | RequestScalarFieldEnum[]
+  }
+
+  /**
+   * User.favorites
+   */
+  export type User$favoritesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Favorite
+     */
+    select?: FavoriteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FavoriteInclude<ExtArgs> | null
+    where?: FavoriteWhereInput
+    orderBy?: FavoriteOrderByWithRelationInput | FavoriteOrderByWithRelationInput[]
+    cursor?: FavoriteWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FavoriteScalarFieldEnum | FavoriteScalarFieldEnum[]
+  }
+
+  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2224,6 +2526,9 @@ export namespace Prisma {
     createdAt?: boolean
     userId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    requests?: boolean | Listing$requestsArgs<ExtArgs>
+    favorites?: boolean | Listing$favoritesArgs<ExtArgs>
+    _count?: boolean | ListingCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["listing"]>
 
   export type ListingSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2265,6 +2570,9 @@ export namespace Prisma {
 
   export type ListingInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    requests?: boolean | Listing$requestsArgs<ExtArgs>
+    favorites?: boolean | Listing$favoritesArgs<ExtArgs>
+    _count?: boolean | ListingCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ListingIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -2274,6 +2582,8 @@ export namespace Prisma {
     name: "Listing"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
+      requests: Prisma.$RequestPayload<ExtArgs>[]
+      favorites: Prisma.$FavoritePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2656,6 +2966,8 @@ export namespace Prisma {
   export interface Prisma__ListingClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    requests<T extends Listing$requestsArgs<ExtArgs> = {}>(args?: Subset<T, Listing$requestsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RequestPayload<ExtArgs>, T, "findMany"> | Null>
+    favorites<T extends Listing$favoritesArgs<ExtArgs> = {}>(args?: Subset<T, Listing$favoritesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FavoritePayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3018,6 +3330,46 @@ export namespace Prisma {
   }
 
   /**
+   * Listing.requests
+   */
+  export type Listing$requestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Request
+     */
+    select?: RequestSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RequestInclude<ExtArgs> | null
+    where?: RequestWhereInput
+    orderBy?: RequestOrderByWithRelationInput | RequestOrderByWithRelationInput[]
+    cursor?: RequestWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RequestScalarFieldEnum | RequestScalarFieldEnum[]
+  }
+
+  /**
+   * Listing.favorites
+   */
+  export type Listing$favoritesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Favorite
+     */
+    select?: FavoriteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FavoriteInclude<ExtArgs> | null
+    where?: FavoriteWhereInput
+    orderBy?: FavoriteOrderByWithRelationInput | FavoriteOrderByWithRelationInput[]
+    cursor?: FavoriteWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FavoriteScalarFieldEnum | FavoriteScalarFieldEnum[]
+  }
+
+  /**
    * Listing without action
    */
   export type ListingDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3029,6 +3381,1872 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: ListingInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Request
+   */
+
+  export type AggregateRequest = {
+    _count: RequestCountAggregateOutputType | null
+    _min: RequestMinAggregateOutputType | null
+    _max: RequestMaxAggregateOutputType | null
+  }
+
+  export type RequestMinAggregateOutputType = {
+    id: string | null
+    status: string | null
+    userId: string | null
+    listingId: string | null
+    createdAt: Date | null
+  }
+
+  export type RequestMaxAggregateOutputType = {
+    id: string | null
+    status: string | null
+    userId: string | null
+    listingId: string | null
+    createdAt: Date | null
+  }
+
+  export type RequestCountAggregateOutputType = {
+    id: number
+    status: number
+    userId: number
+    listingId: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type RequestMinAggregateInputType = {
+    id?: true
+    status?: true
+    userId?: true
+    listingId?: true
+    createdAt?: true
+  }
+
+  export type RequestMaxAggregateInputType = {
+    id?: true
+    status?: true
+    userId?: true
+    listingId?: true
+    createdAt?: true
+  }
+
+  export type RequestCountAggregateInputType = {
+    id?: true
+    status?: true
+    userId?: true
+    listingId?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type RequestAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Request to aggregate.
+     */
+    where?: RequestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Requests to fetch.
+     */
+    orderBy?: RequestOrderByWithRelationInput | RequestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: RequestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Requests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Requests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Requests
+    **/
+    _count?: true | RequestCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: RequestMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: RequestMaxAggregateInputType
+  }
+
+  export type GetRequestAggregateType<T extends RequestAggregateArgs> = {
+        [P in keyof T & keyof AggregateRequest]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateRequest[P]>
+      : GetScalarType<T[P], AggregateRequest[P]>
+  }
+
+
+
+
+  export type RequestGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RequestWhereInput
+    orderBy?: RequestOrderByWithAggregationInput | RequestOrderByWithAggregationInput[]
+    by: RequestScalarFieldEnum[] | RequestScalarFieldEnum
+    having?: RequestScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: RequestCountAggregateInputType | true
+    _min?: RequestMinAggregateInputType
+    _max?: RequestMaxAggregateInputType
+  }
+
+  export type RequestGroupByOutputType = {
+    id: string
+    status: string
+    userId: string
+    listingId: string
+    createdAt: Date
+    _count: RequestCountAggregateOutputType | null
+    _min: RequestMinAggregateOutputType | null
+    _max: RequestMaxAggregateOutputType | null
+  }
+
+  type GetRequestGroupByPayload<T extends RequestGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<RequestGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof RequestGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], RequestGroupByOutputType[P]>
+            : GetScalarType<T[P], RequestGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type RequestSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    status?: boolean
+    userId?: boolean
+    listingId?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    listing?: boolean | ListingDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["request"]>
+
+  export type RequestSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    status?: boolean
+    userId?: boolean
+    listingId?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    listing?: boolean | ListingDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["request"]>
+
+  export type RequestSelectScalar = {
+    id?: boolean
+    status?: boolean
+    userId?: boolean
+    listingId?: boolean
+    createdAt?: boolean
+  }
+
+  export type RequestInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    listing?: boolean | ListingDefaultArgs<ExtArgs>
+  }
+  export type RequestIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    listing?: boolean | ListingDefaultArgs<ExtArgs>
+  }
+
+  export type $RequestPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Request"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      listing: Prisma.$ListingPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      status: string
+      userId: string
+      listingId: string
+      createdAt: Date
+    }, ExtArgs["result"]["request"]>
+    composites: {}
+  }
+
+  type RequestGetPayload<S extends boolean | null | undefined | RequestDefaultArgs> = $Result.GetResult<Prisma.$RequestPayload, S>
+
+  type RequestCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<RequestFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: RequestCountAggregateInputType | true
+    }
+
+  export interface RequestDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Request'], meta: { name: 'Request' } }
+    /**
+     * Find zero or one Request that matches the filter.
+     * @param {RequestFindUniqueArgs} args - Arguments to find a Request
+     * @example
+     * // Get one Request
+     * const request = await prisma.request.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends RequestFindUniqueArgs>(args: SelectSubset<T, RequestFindUniqueArgs<ExtArgs>>): Prisma__RequestClient<$Result.GetResult<Prisma.$RequestPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one Request that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {RequestFindUniqueOrThrowArgs} args - Arguments to find a Request
+     * @example
+     * // Get one Request
+     * const request = await prisma.request.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends RequestFindUniqueOrThrowArgs>(args: SelectSubset<T, RequestFindUniqueOrThrowArgs<ExtArgs>>): Prisma__RequestClient<$Result.GetResult<Prisma.$RequestPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first Request that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RequestFindFirstArgs} args - Arguments to find a Request
+     * @example
+     * // Get one Request
+     * const request = await prisma.request.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends RequestFindFirstArgs>(args?: SelectSubset<T, RequestFindFirstArgs<ExtArgs>>): Prisma__RequestClient<$Result.GetResult<Prisma.$RequestPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first Request that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RequestFindFirstOrThrowArgs} args - Arguments to find a Request
+     * @example
+     * // Get one Request
+     * const request = await prisma.request.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends RequestFindFirstOrThrowArgs>(args?: SelectSubset<T, RequestFindFirstOrThrowArgs<ExtArgs>>): Prisma__RequestClient<$Result.GetResult<Prisma.$RequestPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more Requests that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RequestFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Requests
+     * const requests = await prisma.request.findMany()
+     * 
+     * // Get first 10 Requests
+     * const requests = await prisma.request.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const requestWithIdOnly = await prisma.request.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends RequestFindManyArgs>(args?: SelectSubset<T, RequestFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RequestPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a Request.
+     * @param {RequestCreateArgs} args - Arguments to create a Request.
+     * @example
+     * // Create one Request
+     * const Request = await prisma.request.create({
+     *   data: {
+     *     // ... data to create a Request
+     *   }
+     * })
+     * 
+     */
+    create<T extends RequestCreateArgs>(args: SelectSubset<T, RequestCreateArgs<ExtArgs>>): Prisma__RequestClient<$Result.GetResult<Prisma.$RequestPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many Requests.
+     * @param {RequestCreateManyArgs} args - Arguments to create many Requests.
+     * @example
+     * // Create many Requests
+     * const request = await prisma.request.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends RequestCreateManyArgs>(args?: SelectSubset<T, RequestCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Requests and returns the data saved in the database.
+     * @param {RequestCreateManyAndReturnArgs} args - Arguments to create many Requests.
+     * @example
+     * // Create many Requests
+     * const request = await prisma.request.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Requests and only return the `id`
+     * const requestWithIdOnly = await prisma.request.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends RequestCreateManyAndReturnArgs>(args?: SelectSubset<T, RequestCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RequestPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a Request.
+     * @param {RequestDeleteArgs} args - Arguments to delete one Request.
+     * @example
+     * // Delete one Request
+     * const Request = await prisma.request.delete({
+     *   where: {
+     *     // ... filter to delete one Request
+     *   }
+     * })
+     * 
+     */
+    delete<T extends RequestDeleteArgs>(args: SelectSubset<T, RequestDeleteArgs<ExtArgs>>): Prisma__RequestClient<$Result.GetResult<Prisma.$RequestPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one Request.
+     * @param {RequestUpdateArgs} args - Arguments to update one Request.
+     * @example
+     * // Update one Request
+     * const request = await prisma.request.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends RequestUpdateArgs>(args: SelectSubset<T, RequestUpdateArgs<ExtArgs>>): Prisma__RequestClient<$Result.GetResult<Prisma.$RequestPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more Requests.
+     * @param {RequestDeleteManyArgs} args - Arguments to filter Requests to delete.
+     * @example
+     * // Delete a few Requests
+     * const { count } = await prisma.request.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends RequestDeleteManyArgs>(args?: SelectSubset<T, RequestDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Requests.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RequestUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Requests
+     * const request = await prisma.request.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends RequestUpdateManyArgs>(args: SelectSubset<T, RequestUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Request.
+     * @param {RequestUpsertArgs} args - Arguments to update or create a Request.
+     * @example
+     * // Update or create a Request
+     * const request = await prisma.request.upsert({
+     *   create: {
+     *     // ... data to create a Request
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Request we want to update
+     *   }
+     * })
+     */
+    upsert<T extends RequestUpsertArgs>(args: SelectSubset<T, RequestUpsertArgs<ExtArgs>>): Prisma__RequestClient<$Result.GetResult<Prisma.$RequestPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of Requests.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RequestCountArgs} args - Arguments to filter Requests to count.
+     * @example
+     * // Count the number of Requests
+     * const count = await prisma.request.count({
+     *   where: {
+     *     // ... the filter for the Requests we want to count
+     *   }
+     * })
+    **/
+    count<T extends RequestCountArgs>(
+      args?: Subset<T, RequestCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], RequestCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Request.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RequestAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends RequestAggregateArgs>(args: Subset<T, RequestAggregateArgs>): Prisma.PrismaPromise<GetRequestAggregateType<T>>
+
+    /**
+     * Group by Request.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RequestGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends RequestGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: RequestGroupByArgs['orderBy'] }
+        : { orderBy?: RequestGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, RequestGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRequestGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Request model
+   */
+  readonly fields: RequestFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Request.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__RequestClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    listing<T extends ListingDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ListingDefaultArgs<ExtArgs>>): Prisma__ListingClient<$Result.GetResult<Prisma.$ListingPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Request model
+   */ 
+  interface RequestFieldRefs {
+    readonly id: FieldRef<"Request", 'String'>
+    readonly status: FieldRef<"Request", 'String'>
+    readonly userId: FieldRef<"Request", 'String'>
+    readonly listingId: FieldRef<"Request", 'String'>
+    readonly createdAt: FieldRef<"Request", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Request findUnique
+   */
+  export type RequestFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Request
+     */
+    select?: RequestSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RequestInclude<ExtArgs> | null
+    /**
+     * Filter, which Request to fetch.
+     */
+    where: RequestWhereUniqueInput
+  }
+
+  /**
+   * Request findUniqueOrThrow
+   */
+  export type RequestFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Request
+     */
+    select?: RequestSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RequestInclude<ExtArgs> | null
+    /**
+     * Filter, which Request to fetch.
+     */
+    where: RequestWhereUniqueInput
+  }
+
+  /**
+   * Request findFirst
+   */
+  export type RequestFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Request
+     */
+    select?: RequestSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RequestInclude<ExtArgs> | null
+    /**
+     * Filter, which Request to fetch.
+     */
+    where?: RequestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Requests to fetch.
+     */
+    orderBy?: RequestOrderByWithRelationInput | RequestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Requests.
+     */
+    cursor?: RequestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Requests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Requests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Requests.
+     */
+    distinct?: RequestScalarFieldEnum | RequestScalarFieldEnum[]
+  }
+
+  /**
+   * Request findFirstOrThrow
+   */
+  export type RequestFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Request
+     */
+    select?: RequestSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RequestInclude<ExtArgs> | null
+    /**
+     * Filter, which Request to fetch.
+     */
+    where?: RequestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Requests to fetch.
+     */
+    orderBy?: RequestOrderByWithRelationInput | RequestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Requests.
+     */
+    cursor?: RequestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Requests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Requests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Requests.
+     */
+    distinct?: RequestScalarFieldEnum | RequestScalarFieldEnum[]
+  }
+
+  /**
+   * Request findMany
+   */
+  export type RequestFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Request
+     */
+    select?: RequestSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RequestInclude<ExtArgs> | null
+    /**
+     * Filter, which Requests to fetch.
+     */
+    where?: RequestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Requests to fetch.
+     */
+    orderBy?: RequestOrderByWithRelationInput | RequestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Requests.
+     */
+    cursor?: RequestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Requests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Requests.
+     */
+    skip?: number
+    distinct?: RequestScalarFieldEnum | RequestScalarFieldEnum[]
+  }
+
+  /**
+   * Request create
+   */
+  export type RequestCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Request
+     */
+    select?: RequestSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RequestInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Request.
+     */
+    data: XOR<RequestCreateInput, RequestUncheckedCreateInput>
+  }
+
+  /**
+   * Request createMany
+   */
+  export type RequestCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Requests.
+     */
+    data: RequestCreateManyInput | RequestCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Request createManyAndReturn
+   */
+  export type RequestCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Request
+     */
+    select?: RequestSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many Requests.
+     */
+    data: RequestCreateManyInput | RequestCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RequestIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Request update
+   */
+  export type RequestUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Request
+     */
+    select?: RequestSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RequestInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Request.
+     */
+    data: XOR<RequestUpdateInput, RequestUncheckedUpdateInput>
+    /**
+     * Choose, which Request to update.
+     */
+    where: RequestWhereUniqueInput
+  }
+
+  /**
+   * Request updateMany
+   */
+  export type RequestUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Requests.
+     */
+    data: XOR<RequestUpdateManyMutationInput, RequestUncheckedUpdateManyInput>
+    /**
+     * Filter which Requests to update
+     */
+    where?: RequestWhereInput
+  }
+
+  /**
+   * Request upsert
+   */
+  export type RequestUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Request
+     */
+    select?: RequestSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RequestInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Request to update in case it exists.
+     */
+    where: RequestWhereUniqueInput
+    /**
+     * In case the Request found by the `where` argument doesn't exist, create a new Request with this data.
+     */
+    create: XOR<RequestCreateInput, RequestUncheckedCreateInput>
+    /**
+     * In case the Request was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<RequestUpdateInput, RequestUncheckedUpdateInput>
+  }
+
+  /**
+   * Request delete
+   */
+  export type RequestDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Request
+     */
+    select?: RequestSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RequestInclude<ExtArgs> | null
+    /**
+     * Filter which Request to delete.
+     */
+    where: RequestWhereUniqueInput
+  }
+
+  /**
+   * Request deleteMany
+   */
+  export type RequestDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Requests to delete
+     */
+    where?: RequestWhereInput
+  }
+
+  /**
+   * Request without action
+   */
+  export type RequestDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Request
+     */
+    select?: RequestSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RequestInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Favorite
+   */
+
+  export type AggregateFavorite = {
+    _count: FavoriteCountAggregateOutputType | null
+    _min: FavoriteMinAggregateOutputType | null
+    _max: FavoriteMaxAggregateOutputType | null
+  }
+
+  export type FavoriteMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    listingId: string | null
+    createdAt: Date | null
+  }
+
+  export type FavoriteMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    listingId: string | null
+    createdAt: Date | null
+  }
+
+  export type FavoriteCountAggregateOutputType = {
+    id: number
+    userId: number
+    listingId: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type FavoriteMinAggregateInputType = {
+    id?: true
+    userId?: true
+    listingId?: true
+    createdAt?: true
+  }
+
+  export type FavoriteMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    listingId?: true
+    createdAt?: true
+  }
+
+  export type FavoriteCountAggregateInputType = {
+    id?: true
+    userId?: true
+    listingId?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type FavoriteAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Favorite to aggregate.
+     */
+    where?: FavoriteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Favorites to fetch.
+     */
+    orderBy?: FavoriteOrderByWithRelationInput | FavoriteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: FavoriteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Favorites from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Favorites.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Favorites
+    **/
+    _count?: true | FavoriteCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: FavoriteMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: FavoriteMaxAggregateInputType
+  }
+
+  export type GetFavoriteAggregateType<T extends FavoriteAggregateArgs> = {
+        [P in keyof T & keyof AggregateFavorite]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateFavorite[P]>
+      : GetScalarType<T[P], AggregateFavorite[P]>
+  }
+
+
+
+
+  export type FavoriteGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FavoriteWhereInput
+    orderBy?: FavoriteOrderByWithAggregationInput | FavoriteOrderByWithAggregationInput[]
+    by: FavoriteScalarFieldEnum[] | FavoriteScalarFieldEnum
+    having?: FavoriteScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: FavoriteCountAggregateInputType | true
+    _min?: FavoriteMinAggregateInputType
+    _max?: FavoriteMaxAggregateInputType
+  }
+
+  export type FavoriteGroupByOutputType = {
+    id: string
+    userId: string
+    listingId: string
+    createdAt: Date
+    _count: FavoriteCountAggregateOutputType | null
+    _min: FavoriteMinAggregateOutputType | null
+    _max: FavoriteMaxAggregateOutputType | null
+  }
+
+  type GetFavoriteGroupByPayload<T extends FavoriteGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<FavoriteGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof FavoriteGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], FavoriteGroupByOutputType[P]>
+            : GetScalarType<T[P], FavoriteGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type FavoriteSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    listingId?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    listing?: boolean | ListingDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["favorite"]>
+
+  export type FavoriteSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    listingId?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    listing?: boolean | ListingDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["favorite"]>
+
+  export type FavoriteSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    listingId?: boolean
+    createdAt?: boolean
+  }
+
+  export type FavoriteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    listing?: boolean | ListingDefaultArgs<ExtArgs>
+  }
+  export type FavoriteIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    listing?: boolean | ListingDefaultArgs<ExtArgs>
+  }
+
+  export type $FavoritePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Favorite"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      listing: Prisma.$ListingPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      listingId: string
+      createdAt: Date
+    }, ExtArgs["result"]["favorite"]>
+    composites: {}
+  }
+
+  type FavoriteGetPayload<S extends boolean | null | undefined | FavoriteDefaultArgs> = $Result.GetResult<Prisma.$FavoritePayload, S>
+
+  type FavoriteCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<FavoriteFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: FavoriteCountAggregateInputType | true
+    }
+
+  export interface FavoriteDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Favorite'], meta: { name: 'Favorite' } }
+    /**
+     * Find zero or one Favorite that matches the filter.
+     * @param {FavoriteFindUniqueArgs} args - Arguments to find a Favorite
+     * @example
+     * // Get one Favorite
+     * const favorite = await prisma.favorite.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends FavoriteFindUniqueArgs>(args: SelectSubset<T, FavoriteFindUniqueArgs<ExtArgs>>): Prisma__FavoriteClient<$Result.GetResult<Prisma.$FavoritePayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one Favorite that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {FavoriteFindUniqueOrThrowArgs} args - Arguments to find a Favorite
+     * @example
+     * // Get one Favorite
+     * const favorite = await prisma.favorite.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends FavoriteFindUniqueOrThrowArgs>(args: SelectSubset<T, FavoriteFindUniqueOrThrowArgs<ExtArgs>>): Prisma__FavoriteClient<$Result.GetResult<Prisma.$FavoritePayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first Favorite that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FavoriteFindFirstArgs} args - Arguments to find a Favorite
+     * @example
+     * // Get one Favorite
+     * const favorite = await prisma.favorite.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends FavoriteFindFirstArgs>(args?: SelectSubset<T, FavoriteFindFirstArgs<ExtArgs>>): Prisma__FavoriteClient<$Result.GetResult<Prisma.$FavoritePayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first Favorite that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FavoriteFindFirstOrThrowArgs} args - Arguments to find a Favorite
+     * @example
+     * // Get one Favorite
+     * const favorite = await prisma.favorite.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends FavoriteFindFirstOrThrowArgs>(args?: SelectSubset<T, FavoriteFindFirstOrThrowArgs<ExtArgs>>): Prisma__FavoriteClient<$Result.GetResult<Prisma.$FavoritePayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more Favorites that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FavoriteFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Favorites
+     * const favorites = await prisma.favorite.findMany()
+     * 
+     * // Get first 10 Favorites
+     * const favorites = await prisma.favorite.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const favoriteWithIdOnly = await prisma.favorite.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends FavoriteFindManyArgs>(args?: SelectSubset<T, FavoriteFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FavoritePayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a Favorite.
+     * @param {FavoriteCreateArgs} args - Arguments to create a Favorite.
+     * @example
+     * // Create one Favorite
+     * const Favorite = await prisma.favorite.create({
+     *   data: {
+     *     // ... data to create a Favorite
+     *   }
+     * })
+     * 
+     */
+    create<T extends FavoriteCreateArgs>(args: SelectSubset<T, FavoriteCreateArgs<ExtArgs>>): Prisma__FavoriteClient<$Result.GetResult<Prisma.$FavoritePayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many Favorites.
+     * @param {FavoriteCreateManyArgs} args - Arguments to create many Favorites.
+     * @example
+     * // Create many Favorites
+     * const favorite = await prisma.favorite.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends FavoriteCreateManyArgs>(args?: SelectSubset<T, FavoriteCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Favorites and returns the data saved in the database.
+     * @param {FavoriteCreateManyAndReturnArgs} args - Arguments to create many Favorites.
+     * @example
+     * // Create many Favorites
+     * const favorite = await prisma.favorite.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Favorites and only return the `id`
+     * const favoriteWithIdOnly = await prisma.favorite.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends FavoriteCreateManyAndReturnArgs>(args?: SelectSubset<T, FavoriteCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FavoritePayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a Favorite.
+     * @param {FavoriteDeleteArgs} args - Arguments to delete one Favorite.
+     * @example
+     * // Delete one Favorite
+     * const Favorite = await prisma.favorite.delete({
+     *   where: {
+     *     // ... filter to delete one Favorite
+     *   }
+     * })
+     * 
+     */
+    delete<T extends FavoriteDeleteArgs>(args: SelectSubset<T, FavoriteDeleteArgs<ExtArgs>>): Prisma__FavoriteClient<$Result.GetResult<Prisma.$FavoritePayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one Favorite.
+     * @param {FavoriteUpdateArgs} args - Arguments to update one Favorite.
+     * @example
+     * // Update one Favorite
+     * const favorite = await prisma.favorite.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends FavoriteUpdateArgs>(args: SelectSubset<T, FavoriteUpdateArgs<ExtArgs>>): Prisma__FavoriteClient<$Result.GetResult<Prisma.$FavoritePayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more Favorites.
+     * @param {FavoriteDeleteManyArgs} args - Arguments to filter Favorites to delete.
+     * @example
+     * // Delete a few Favorites
+     * const { count } = await prisma.favorite.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends FavoriteDeleteManyArgs>(args?: SelectSubset<T, FavoriteDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Favorites.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FavoriteUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Favorites
+     * const favorite = await prisma.favorite.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends FavoriteUpdateManyArgs>(args: SelectSubset<T, FavoriteUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Favorite.
+     * @param {FavoriteUpsertArgs} args - Arguments to update or create a Favorite.
+     * @example
+     * // Update or create a Favorite
+     * const favorite = await prisma.favorite.upsert({
+     *   create: {
+     *     // ... data to create a Favorite
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Favorite we want to update
+     *   }
+     * })
+     */
+    upsert<T extends FavoriteUpsertArgs>(args: SelectSubset<T, FavoriteUpsertArgs<ExtArgs>>): Prisma__FavoriteClient<$Result.GetResult<Prisma.$FavoritePayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of Favorites.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FavoriteCountArgs} args - Arguments to filter Favorites to count.
+     * @example
+     * // Count the number of Favorites
+     * const count = await prisma.favorite.count({
+     *   where: {
+     *     // ... the filter for the Favorites we want to count
+     *   }
+     * })
+    **/
+    count<T extends FavoriteCountArgs>(
+      args?: Subset<T, FavoriteCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], FavoriteCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Favorite.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FavoriteAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends FavoriteAggregateArgs>(args: Subset<T, FavoriteAggregateArgs>): Prisma.PrismaPromise<GetFavoriteAggregateType<T>>
+
+    /**
+     * Group by Favorite.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FavoriteGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends FavoriteGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: FavoriteGroupByArgs['orderBy'] }
+        : { orderBy?: FavoriteGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, FavoriteGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFavoriteGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Favorite model
+   */
+  readonly fields: FavoriteFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Favorite.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__FavoriteClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    listing<T extends ListingDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ListingDefaultArgs<ExtArgs>>): Prisma__ListingClient<$Result.GetResult<Prisma.$ListingPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Favorite model
+   */ 
+  interface FavoriteFieldRefs {
+    readonly id: FieldRef<"Favorite", 'String'>
+    readonly userId: FieldRef<"Favorite", 'String'>
+    readonly listingId: FieldRef<"Favorite", 'String'>
+    readonly createdAt: FieldRef<"Favorite", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Favorite findUnique
+   */
+  export type FavoriteFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Favorite
+     */
+    select?: FavoriteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FavoriteInclude<ExtArgs> | null
+    /**
+     * Filter, which Favorite to fetch.
+     */
+    where: FavoriteWhereUniqueInput
+  }
+
+  /**
+   * Favorite findUniqueOrThrow
+   */
+  export type FavoriteFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Favorite
+     */
+    select?: FavoriteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FavoriteInclude<ExtArgs> | null
+    /**
+     * Filter, which Favorite to fetch.
+     */
+    where: FavoriteWhereUniqueInput
+  }
+
+  /**
+   * Favorite findFirst
+   */
+  export type FavoriteFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Favorite
+     */
+    select?: FavoriteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FavoriteInclude<ExtArgs> | null
+    /**
+     * Filter, which Favorite to fetch.
+     */
+    where?: FavoriteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Favorites to fetch.
+     */
+    orderBy?: FavoriteOrderByWithRelationInput | FavoriteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Favorites.
+     */
+    cursor?: FavoriteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Favorites from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Favorites.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Favorites.
+     */
+    distinct?: FavoriteScalarFieldEnum | FavoriteScalarFieldEnum[]
+  }
+
+  /**
+   * Favorite findFirstOrThrow
+   */
+  export type FavoriteFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Favorite
+     */
+    select?: FavoriteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FavoriteInclude<ExtArgs> | null
+    /**
+     * Filter, which Favorite to fetch.
+     */
+    where?: FavoriteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Favorites to fetch.
+     */
+    orderBy?: FavoriteOrderByWithRelationInput | FavoriteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Favorites.
+     */
+    cursor?: FavoriteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Favorites from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Favorites.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Favorites.
+     */
+    distinct?: FavoriteScalarFieldEnum | FavoriteScalarFieldEnum[]
+  }
+
+  /**
+   * Favorite findMany
+   */
+  export type FavoriteFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Favorite
+     */
+    select?: FavoriteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FavoriteInclude<ExtArgs> | null
+    /**
+     * Filter, which Favorites to fetch.
+     */
+    where?: FavoriteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Favorites to fetch.
+     */
+    orderBy?: FavoriteOrderByWithRelationInput | FavoriteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Favorites.
+     */
+    cursor?: FavoriteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Favorites from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Favorites.
+     */
+    skip?: number
+    distinct?: FavoriteScalarFieldEnum | FavoriteScalarFieldEnum[]
+  }
+
+  /**
+   * Favorite create
+   */
+  export type FavoriteCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Favorite
+     */
+    select?: FavoriteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FavoriteInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Favorite.
+     */
+    data: XOR<FavoriteCreateInput, FavoriteUncheckedCreateInput>
+  }
+
+  /**
+   * Favorite createMany
+   */
+  export type FavoriteCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Favorites.
+     */
+    data: FavoriteCreateManyInput | FavoriteCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Favorite createManyAndReturn
+   */
+  export type FavoriteCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Favorite
+     */
+    select?: FavoriteSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many Favorites.
+     */
+    data: FavoriteCreateManyInput | FavoriteCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FavoriteIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Favorite update
+   */
+  export type FavoriteUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Favorite
+     */
+    select?: FavoriteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FavoriteInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Favorite.
+     */
+    data: XOR<FavoriteUpdateInput, FavoriteUncheckedUpdateInput>
+    /**
+     * Choose, which Favorite to update.
+     */
+    where: FavoriteWhereUniqueInput
+  }
+
+  /**
+   * Favorite updateMany
+   */
+  export type FavoriteUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Favorites.
+     */
+    data: XOR<FavoriteUpdateManyMutationInput, FavoriteUncheckedUpdateManyInput>
+    /**
+     * Filter which Favorites to update
+     */
+    where?: FavoriteWhereInput
+  }
+
+  /**
+   * Favorite upsert
+   */
+  export type FavoriteUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Favorite
+     */
+    select?: FavoriteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FavoriteInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Favorite to update in case it exists.
+     */
+    where: FavoriteWhereUniqueInput
+    /**
+     * In case the Favorite found by the `where` argument doesn't exist, create a new Favorite with this data.
+     */
+    create: XOR<FavoriteCreateInput, FavoriteUncheckedCreateInput>
+    /**
+     * In case the Favorite was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<FavoriteUpdateInput, FavoriteUncheckedUpdateInput>
+  }
+
+  /**
+   * Favorite delete
+   */
+  export type FavoriteDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Favorite
+     */
+    select?: FavoriteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FavoriteInclude<ExtArgs> | null
+    /**
+     * Filter which Favorite to delete.
+     */
+    where: FavoriteWhereUniqueInput
+  }
+
+  /**
+   * Favorite deleteMany
+   */
+  export type FavoriteDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Favorites to delete
+     */
+    where?: FavoriteWhereInput
+  }
+
+  /**
+   * Favorite without action
+   */
+  export type FavoriteDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Favorite
+     */
+    select?: FavoriteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FavoriteInclude<ExtArgs> | null
   }
 
 
@@ -3048,6 +5266,8 @@ export namespace Prisma {
 
   export const UserScalarFieldEnum: {
     id: 'id',
+    firstName: 'firstName',
+    lastName: 'lastName',
     email: 'email',
     password: 'password',
     role: 'role',
@@ -3076,6 +5296,27 @@ export namespace Prisma {
   };
 
   export type ListingScalarFieldEnum = (typeof ListingScalarFieldEnum)[keyof typeof ListingScalarFieldEnum]
+
+
+  export const RequestScalarFieldEnum: {
+    id: 'id',
+    status: 'status',
+    userId: 'userId',
+    listingId: 'listingId',
+    createdAt: 'createdAt'
+  };
+
+  export type RequestScalarFieldEnum = (typeof RequestScalarFieldEnum)[keyof typeof RequestScalarFieldEnum]
+
+
+  export const FavoriteScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    listingId: 'listingId',
+    createdAt: 'createdAt'
+  };
+
+  export type FavoriteScalarFieldEnum = (typeof FavoriteScalarFieldEnum)[keyof typeof FavoriteScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -3206,20 +5447,28 @@ export namespace Prisma {
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
     id?: StringFilter<"User"> | string
+    firstName?: StringNullableFilter<"User"> | string | null
+    lastName?: StringNullableFilter<"User"> | string | null
     email?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
     role?: EnumRoleFilter<"User"> | $Enums.Role
     createdAt?: DateTimeFilter<"User"> | Date | string
     listings?: ListingListRelationFilter
+    requests?: RequestListRelationFilter
+    favorites?: FavoriteListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
     id?: SortOrder
+    firstName?: SortOrderInput | SortOrder
+    lastName?: SortOrderInput | SortOrder
     email?: SortOrder
     password?: SortOrder
     role?: SortOrder
     createdAt?: SortOrder
     listings?: ListingOrderByRelationAggregateInput
+    requests?: RequestOrderByRelationAggregateInput
+    favorites?: FavoriteOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -3228,14 +5477,20 @@ export namespace Prisma {
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
+    firstName?: StringNullableFilter<"User"> | string | null
+    lastName?: StringNullableFilter<"User"> | string | null
     password?: StringFilter<"User"> | string
     role?: EnumRoleFilter<"User"> | $Enums.Role
     createdAt?: DateTimeFilter<"User"> | Date | string
     listings?: ListingListRelationFilter
+    requests?: RequestListRelationFilter
+    favorites?: FavoriteListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
+    firstName?: SortOrderInput | SortOrder
+    lastName?: SortOrderInput | SortOrder
     email?: SortOrder
     password?: SortOrder
     role?: SortOrder
@@ -3250,6 +5505,8 @@ export namespace Prisma {
     OR?: UserScalarWhereWithAggregatesInput[]
     NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"User"> | string
+    firstName?: StringNullableWithAggregatesFilter<"User"> | string | null
+    lastName?: StringNullableWithAggregatesFilter<"User"> | string | null
     email?: StringWithAggregatesFilter<"User"> | string
     password?: StringWithAggregatesFilter<"User"> | string
     role?: EnumRoleWithAggregatesFilter<"User"> | $Enums.Role
@@ -3276,6 +5533,8 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Listing"> | Date | string
     userId?: StringFilter<"Listing"> | string
     user?: XOR<UserRelationFilter, UserWhereInput>
+    requests?: RequestListRelationFilter
+    favorites?: FavoriteListRelationFilter
   }
 
   export type ListingOrderByWithRelationInput = {
@@ -3295,6 +5554,8 @@ export namespace Prisma {
     createdAt?: SortOrder
     userId?: SortOrder
     user?: UserOrderByWithRelationInput
+    requests?: RequestOrderByRelationAggregateInput
+    favorites?: FavoriteOrderByRelationAggregateInput
   }
 
   export type ListingWhereUniqueInput = Prisma.AtLeast<{
@@ -3317,6 +5578,8 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Listing"> | Date | string
     userId?: StringFilter<"Listing"> | string
     user?: XOR<UserRelationFilter, UserWhereInput>
+    requests?: RequestListRelationFilter
+    favorites?: FavoriteListRelationFilter
   }, "id">
 
   export type ListingOrderByWithAggregationInput = {
@@ -3363,44 +5626,174 @@ export namespace Prisma {
     userId?: StringWithAggregatesFilter<"Listing"> | string
   }
 
+  export type RequestWhereInput = {
+    AND?: RequestWhereInput | RequestWhereInput[]
+    OR?: RequestWhereInput[]
+    NOT?: RequestWhereInput | RequestWhereInput[]
+    id?: StringFilter<"Request"> | string
+    status?: StringFilter<"Request"> | string
+    userId?: StringFilter<"Request"> | string
+    listingId?: StringFilter<"Request"> | string
+    createdAt?: DateTimeFilter<"Request"> | Date | string
+    user?: XOR<UserRelationFilter, UserWhereInput>
+    listing?: XOR<ListingRelationFilter, ListingWhereInput>
+  }
+
+  export type RequestOrderByWithRelationInput = {
+    id?: SortOrder
+    status?: SortOrder
+    userId?: SortOrder
+    listingId?: SortOrder
+    createdAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    listing?: ListingOrderByWithRelationInput
+  }
+
+  export type RequestWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: RequestWhereInput | RequestWhereInput[]
+    OR?: RequestWhereInput[]
+    NOT?: RequestWhereInput | RequestWhereInput[]
+    status?: StringFilter<"Request"> | string
+    userId?: StringFilter<"Request"> | string
+    listingId?: StringFilter<"Request"> | string
+    createdAt?: DateTimeFilter<"Request"> | Date | string
+    user?: XOR<UserRelationFilter, UserWhereInput>
+    listing?: XOR<ListingRelationFilter, ListingWhereInput>
+  }, "id">
+
+  export type RequestOrderByWithAggregationInput = {
+    id?: SortOrder
+    status?: SortOrder
+    userId?: SortOrder
+    listingId?: SortOrder
+    createdAt?: SortOrder
+    _count?: RequestCountOrderByAggregateInput
+    _max?: RequestMaxOrderByAggregateInput
+    _min?: RequestMinOrderByAggregateInput
+  }
+
+  export type RequestScalarWhereWithAggregatesInput = {
+    AND?: RequestScalarWhereWithAggregatesInput | RequestScalarWhereWithAggregatesInput[]
+    OR?: RequestScalarWhereWithAggregatesInput[]
+    NOT?: RequestScalarWhereWithAggregatesInput | RequestScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Request"> | string
+    status?: StringWithAggregatesFilter<"Request"> | string
+    userId?: StringWithAggregatesFilter<"Request"> | string
+    listingId?: StringWithAggregatesFilter<"Request"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Request"> | Date | string
+  }
+
+  export type FavoriteWhereInput = {
+    AND?: FavoriteWhereInput | FavoriteWhereInput[]
+    OR?: FavoriteWhereInput[]
+    NOT?: FavoriteWhereInput | FavoriteWhereInput[]
+    id?: StringFilter<"Favorite"> | string
+    userId?: StringFilter<"Favorite"> | string
+    listingId?: StringFilter<"Favorite"> | string
+    createdAt?: DateTimeFilter<"Favorite"> | Date | string
+    user?: XOR<UserRelationFilter, UserWhereInput>
+    listing?: XOR<ListingRelationFilter, ListingWhereInput>
+  }
+
+  export type FavoriteOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    listingId?: SortOrder
+    createdAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    listing?: ListingOrderByWithRelationInput
+  }
+
+  export type FavoriteWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId_listingId?: FavoriteUserIdListingIdCompoundUniqueInput
+    AND?: FavoriteWhereInput | FavoriteWhereInput[]
+    OR?: FavoriteWhereInput[]
+    NOT?: FavoriteWhereInput | FavoriteWhereInput[]
+    userId?: StringFilter<"Favorite"> | string
+    listingId?: StringFilter<"Favorite"> | string
+    createdAt?: DateTimeFilter<"Favorite"> | Date | string
+    user?: XOR<UserRelationFilter, UserWhereInput>
+    listing?: XOR<ListingRelationFilter, ListingWhereInput>
+  }, "id" | "userId_listingId">
+
+  export type FavoriteOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    listingId?: SortOrder
+    createdAt?: SortOrder
+    _count?: FavoriteCountOrderByAggregateInput
+    _max?: FavoriteMaxOrderByAggregateInput
+    _min?: FavoriteMinOrderByAggregateInput
+  }
+
+  export type FavoriteScalarWhereWithAggregatesInput = {
+    AND?: FavoriteScalarWhereWithAggregatesInput | FavoriteScalarWhereWithAggregatesInput[]
+    OR?: FavoriteScalarWhereWithAggregatesInput[]
+    NOT?: FavoriteScalarWhereWithAggregatesInput | FavoriteScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Favorite"> | string
+    userId?: StringWithAggregatesFilter<"Favorite"> | string
+    listingId?: StringWithAggregatesFilter<"Favorite"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Favorite"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
+    firstName?: string | null
+    lastName?: string | null
     email: string
     password: string
     role?: $Enums.Role
     createdAt?: Date | string
     listings?: ListingCreateNestedManyWithoutUserInput
+    requests?: RequestCreateNestedManyWithoutUserInput
+    favorites?: FavoriteCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
     id?: string
+    firstName?: string | null
+    lastName?: string | null
     email: string
     password: string
     role?: $Enums.Role
     createdAt?: Date | string
     listings?: ListingUncheckedCreateNestedManyWithoutUserInput
+    requests?: RequestUncheckedCreateNestedManyWithoutUserInput
+    favorites?: FavoriteUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     listings?: ListingUpdateManyWithoutUserNestedInput
+    requests?: RequestUpdateManyWithoutUserNestedInput
+    favorites?: FavoriteUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     listings?: ListingUncheckedUpdateManyWithoutUserNestedInput
+    requests?: RequestUncheckedUpdateManyWithoutUserNestedInput
+    favorites?: FavoriteUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
     id?: string
+    firstName?: string | null
+    lastName?: string | null
     email: string
     password: string
     role?: $Enums.Role
@@ -3409,6 +5802,8 @@ export namespace Prisma {
 
   export type UserUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
@@ -3417,6 +5812,8 @@ export namespace Prisma {
 
   export type UserUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
@@ -3439,6 +5836,8 @@ export namespace Prisma {
     isAvailable?: boolean
     createdAt?: Date | string
     user: UserCreateNestedOneWithoutListingsInput
+    requests?: RequestCreateNestedManyWithoutListingInput
+    favorites?: FavoriteCreateNestedManyWithoutListingInput
   }
 
   export type ListingUncheckedCreateInput = {
@@ -3457,6 +5856,8 @@ export namespace Prisma {
     isAvailable?: boolean
     createdAt?: Date | string
     userId: string
+    requests?: RequestUncheckedCreateNestedManyWithoutListingInput
+    favorites?: FavoriteUncheckedCreateNestedManyWithoutListingInput
   }
 
   export type ListingUpdateInput = {
@@ -3475,6 +5876,8 @@ export namespace Prisma {
     isAvailable?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutListingsNestedInput
+    requests?: RequestUpdateManyWithoutListingNestedInput
+    favorites?: FavoriteUpdateManyWithoutListingNestedInput
   }
 
   export type ListingUncheckedUpdateInput = {
@@ -3493,6 +5896,8 @@ export namespace Prisma {
     isAvailable?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: StringFieldUpdateOperationsInput | string
+    requests?: RequestUncheckedUpdateManyWithoutListingNestedInput
+    favorites?: FavoriteUncheckedUpdateManyWithoutListingNestedInput
   }
 
   export type ListingCreateManyInput = {
@@ -3548,6 +5953,107 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
   }
 
+  export type RequestCreateInput = {
+    id?: string
+    status?: string
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutRequestsInput
+    listing: ListingCreateNestedOneWithoutRequestsInput
+  }
+
+  export type RequestUncheckedCreateInput = {
+    id?: string
+    status?: string
+    userId: string
+    listingId: string
+    createdAt?: Date | string
+  }
+
+  export type RequestUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutRequestsNestedInput
+    listing?: ListingUpdateOneRequiredWithoutRequestsNestedInput
+  }
+
+  export type RequestUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    listingId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RequestCreateManyInput = {
+    id?: string
+    status?: string
+    userId: string
+    listingId: string
+    createdAt?: Date | string
+  }
+
+  export type RequestUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RequestUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    listingId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FavoriteCreateInput = {
+    id?: string
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutFavoritesInput
+    listing: ListingCreateNestedOneWithoutFavoritesInput
+  }
+
+  export type FavoriteUncheckedCreateInput = {
+    id?: string
+    userId: string
+    listingId: string
+    createdAt?: Date | string
+  }
+
+  export type FavoriteUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutFavoritesNestedInput
+    listing?: ListingUpdateOneRequiredWithoutFavoritesNestedInput
+  }
+
+  export type FavoriteUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    listingId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FavoriteCreateManyInput = {
+    id?: string
+    userId: string
+    listingId: string
+    createdAt?: Date | string
+  }
+
+  export type FavoriteUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FavoriteUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    listingId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -3561,6 +6067,21 @@ export namespace Prisma {
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     mode?: QueryMode
     not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type EnumRoleFilter<$PrismaModel = never> = {
@@ -3587,12 +6108,39 @@ export namespace Prisma {
     none?: ListingWhereInput
   }
 
+  export type RequestListRelationFilter = {
+    every?: RequestWhereInput
+    some?: RequestWhereInput
+    none?: RequestWhereInput
+  }
+
+  export type FavoriteListRelationFilter = {
+    every?: FavoriteWhereInput
+    some?: FavoriteWhereInput
+    none?: FavoriteWhereInput
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
   export type ListingOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type RequestOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type FavoriteOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
   export type UserCountOrderByAggregateInput = {
     id?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
     email?: SortOrder
     password?: SortOrder
     role?: SortOrder
@@ -3601,6 +6149,8 @@ export namespace Prisma {
 
   export type UserMaxOrderByAggregateInput = {
     id?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
     email?: SortOrder
     password?: SortOrder
     role?: SortOrder
@@ -3609,6 +6159,8 @@ export namespace Prisma {
 
   export type UserMinOrderByAggregateInput = {
     id?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
     email?: SortOrder
     password?: SortOrder
     role?: SortOrder
@@ -3631,6 +6183,24 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
     _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type EnumRoleWithAggregatesFilter<$PrismaModel = never> = {
@@ -3675,21 +6245,6 @@ export namespace Prisma {
     not?: NestedEnumCategoryFilter<$PrismaModel> | $Enums.Category
   }
 
-  export type StringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
   export type IntNullableFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
@@ -3709,11 +6264,6 @@ export namespace Prisma {
   export type UserRelationFilter = {
     is?: UserWhereInput
     isNot?: UserWhereInput
-  }
-
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
   }
 
   export type ListingCountOrderByAggregateInput = {
@@ -3808,24 +6358,6 @@ export namespace Prisma {
     _max?: NestedEnumCategoryFilter<$PrismaModel>
   }
 
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
   export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
@@ -3850,11 +6382,80 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
+  export type ListingRelationFilter = {
+    is?: ListingWhereInput
+    isNot?: ListingWhereInput
+  }
+
+  export type RequestCountOrderByAggregateInput = {
+    id?: SortOrder
+    status?: SortOrder
+    userId?: SortOrder
+    listingId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type RequestMaxOrderByAggregateInput = {
+    id?: SortOrder
+    status?: SortOrder
+    userId?: SortOrder
+    listingId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type RequestMinOrderByAggregateInput = {
+    id?: SortOrder
+    status?: SortOrder
+    userId?: SortOrder
+    listingId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type FavoriteUserIdListingIdCompoundUniqueInput = {
+    userId: string
+    listingId: string
+  }
+
+  export type FavoriteCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    listingId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type FavoriteMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    listingId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type FavoriteMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    listingId?: SortOrder
+    createdAt?: SortOrder
+  }
+
   export type ListingCreateNestedManyWithoutUserInput = {
     create?: XOR<ListingCreateWithoutUserInput, ListingUncheckedCreateWithoutUserInput> | ListingCreateWithoutUserInput[] | ListingUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ListingCreateOrConnectWithoutUserInput | ListingCreateOrConnectWithoutUserInput[]
     createMany?: ListingCreateManyUserInputEnvelope
     connect?: ListingWhereUniqueInput | ListingWhereUniqueInput[]
+  }
+
+  export type RequestCreateNestedManyWithoutUserInput = {
+    create?: XOR<RequestCreateWithoutUserInput, RequestUncheckedCreateWithoutUserInput> | RequestCreateWithoutUserInput[] | RequestUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: RequestCreateOrConnectWithoutUserInput | RequestCreateOrConnectWithoutUserInput[]
+    createMany?: RequestCreateManyUserInputEnvelope
+    connect?: RequestWhereUniqueInput | RequestWhereUniqueInput[]
+  }
+
+  export type FavoriteCreateNestedManyWithoutUserInput = {
+    create?: XOR<FavoriteCreateWithoutUserInput, FavoriteUncheckedCreateWithoutUserInput> | FavoriteCreateWithoutUserInput[] | FavoriteUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: FavoriteCreateOrConnectWithoutUserInput | FavoriteCreateOrConnectWithoutUserInput[]
+    createMany?: FavoriteCreateManyUserInputEnvelope
+    connect?: FavoriteWhereUniqueInput | FavoriteWhereUniqueInput[]
   }
 
   export type ListingUncheckedCreateNestedManyWithoutUserInput = {
@@ -3864,8 +6465,26 @@ export namespace Prisma {
     connect?: ListingWhereUniqueInput | ListingWhereUniqueInput[]
   }
 
+  export type RequestUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<RequestCreateWithoutUserInput, RequestUncheckedCreateWithoutUserInput> | RequestCreateWithoutUserInput[] | RequestUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: RequestCreateOrConnectWithoutUserInput | RequestCreateOrConnectWithoutUserInput[]
+    createMany?: RequestCreateManyUserInputEnvelope
+    connect?: RequestWhereUniqueInput | RequestWhereUniqueInput[]
+  }
+
+  export type FavoriteUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<FavoriteCreateWithoutUserInput, FavoriteUncheckedCreateWithoutUserInput> | FavoriteCreateWithoutUserInput[] | FavoriteUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: FavoriteCreateOrConnectWithoutUserInput | FavoriteCreateOrConnectWithoutUserInput[]
+    createMany?: FavoriteCreateManyUserInputEnvelope
+    connect?: FavoriteWhereUniqueInput | FavoriteWhereUniqueInput[]
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
   }
 
   export type EnumRoleFieldUpdateOperationsInput = {
@@ -3890,6 +6509,34 @@ export namespace Prisma {
     deleteMany?: ListingScalarWhereInput | ListingScalarWhereInput[]
   }
 
+  export type RequestUpdateManyWithoutUserNestedInput = {
+    create?: XOR<RequestCreateWithoutUserInput, RequestUncheckedCreateWithoutUserInput> | RequestCreateWithoutUserInput[] | RequestUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: RequestCreateOrConnectWithoutUserInput | RequestCreateOrConnectWithoutUserInput[]
+    upsert?: RequestUpsertWithWhereUniqueWithoutUserInput | RequestUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: RequestCreateManyUserInputEnvelope
+    set?: RequestWhereUniqueInput | RequestWhereUniqueInput[]
+    disconnect?: RequestWhereUniqueInput | RequestWhereUniqueInput[]
+    delete?: RequestWhereUniqueInput | RequestWhereUniqueInput[]
+    connect?: RequestWhereUniqueInput | RequestWhereUniqueInput[]
+    update?: RequestUpdateWithWhereUniqueWithoutUserInput | RequestUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: RequestUpdateManyWithWhereWithoutUserInput | RequestUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: RequestScalarWhereInput | RequestScalarWhereInput[]
+  }
+
+  export type FavoriteUpdateManyWithoutUserNestedInput = {
+    create?: XOR<FavoriteCreateWithoutUserInput, FavoriteUncheckedCreateWithoutUserInput> | FavoriteCreateWithoutUserInput[] | FavoriteUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: FavoriteCreateOrConnectWithoutUserInput | FavoriteCreateOrConnectWithoutUserInput[]
+    upsert?: FavoriteUpsertWithWhereUniqueWithoutUserInput | FavoriteUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: FavoriteCreateManyUserInputEnvelope
+    set?: FavoriteWhereUniqueInput | FavoriteWhereUniqueInput[]
+    disconnect?: FavoriteWhereUniqueInput | FavoriteWhereUniqueInput[]
+    delete?: FavoriteWhereUniqueInput | FavoriteWhereUniqueInput[]
+    connect?: FavoriteWhereUniqueInput | FavoriteWhereUniqueInput[]
+    update?: FavoriteUpdateWithWhereUniqueWithoutUserInput | FavoriteUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: FavoriteUpdateManyWithWhereWithoutUserInput | FavoriteUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: FavoriteScalarWhereInput | FavoriteScalarWhereInput[]
+  }
+
   export type ListingUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<ListingCreateWithoutUserInput, ListingUncheckedCreateWithoutUserInput> | ListingCreateWithoutUserInput[] | ListingUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ListingCreateOrConnectWithoutUserInput | ListingCreateOrConnectWithoutUserInput[]
@@ -3904,10 +6551,66 @@ export namespace Prisma {
     deleteMany?: ListingScalarWhereInput | ListingScalarWhereInput[]
   }
 
+  export type RequestUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<RequestCreateWithoutUserInput, RequestUncheckedCreateWithoutUserInput> | RequestCreateWithoutUserInput[] | RequestUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: RequestCreateOrConnectWithoutUserInput | RequestCreateOrConnectWithoutUserInput[]
+    upsert?: RequestUpsertWithWhereUniqueWithoutUserInput | RequestUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: RequestCreateManyUserInputEnvelope
+    set?: RequestWhereUniqueInput | RequestWhereUniqueInput[]
+    disconnect?: RequestWhereUniqueInput | RequestWhereUniqueInput[]
+    delete?: RequestWhereUniqueInput | RequestWhereUniqueInput[]
+    connect?: RequestWhereUniqueInput | RequestWhereUniqueInput[]
+    update?: RequestUpdateWithWhereUniqueWithoutUserInput | RequestUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: RequestUpdateManyWithWhereWithoutUserInput | RequestUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: RequestScalarWhereInput | RequestScalarWhereInput[]
+  }
+
+  export type FavoriteUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<FavoriteCreateWithoutUserInput, FavoriteUncheckedCreateWithoutUserInput> | FavoriteCreateWithoutUserInput[] | FavoriteUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: FavoriteCreateOrConnectWithoutUserInput | FavoriteCreateOrConnectWithoutUserInput[]
+    upsert?: FavoriteUpsertWithWhereUniqueWithoutUserInput | FavoriteUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: FavoriteCreateManyUserInputEnvelope
+    set?: FavoriteWhereUniqueInput | FavoriteWhereUniqueInput[]
+    disconnect?: FavoriteWhereUniqueInput | FavoriteWhereUniqueInput[]
+    delete?: FavoriteWhereUniqueInput | FavoriteWhereUniqueInput[]
+    connect?: FavoriteWhereUniqueInput | FavoriteWhereUniqueInput[]
+    update?: FavoriteUpdateWithWhereUniqueWithoutUserInput | FavoriteUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: FavoriteUpdateManyWithWhereWithoutUserInput | FavoriteUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: FavoriteScalarWhereInput | FavoriteScalarWhereInput[]
+  }
+
   export type UserCreateNestedOneWithoutListingsInput = {
     create?: XOR<UserCreateWithoutListingsInput, UserUncheckedCreateWithoutListingsInput>
     connectOrCreate?: UserCreateOrConnectWithoutListingsInput
     connect?: UserWhereUniqueInput
+  }
+
+  export type RequestCreateNestedManyWithoutListingInput = {
+    create?: XOR<RequestCreateWithoutListingInput, RequestUncheckedCreateWithoutListingInput> | RequestCreateWithoutListingInput[] | RequestUncheckedCreateWithoutListingInput[]
+    connectOrCreate?: RequestCreateOrConnectWithoutListingInput | RequestCreateOrConnectWithoutListingInput[]
+    createMany?: RequestCreateManyListingInputEnvelope
+    connect?: RequestWhereUniqueInput | RequestWhereUniqueInput[]
+  }
+
+  export type FavoriteCreateNestedManyWithoutListingInput = {
+    create?: XOR<FavoriteCreateWithoutListingInput, FavoriteUncheckedCreateWithoutListingInput> | FavoriteCreateWithoutListingInput[] | FavoriteUncheckedCreateWithoutListingInput[]
+    connectOrCreate?: FavoriteCreateOrConnectWithoutListingInput | FavoriteCreateOrConnectWithoutListingInput[]
+    createMany?: FavoriteCreateManyListingInputEnvelope
+    connect?: FavoriteWhereUniqueInput | FavoriteWhereUniqueInput[]
+  }
+
+  export type RequestUncheckedCreateNestedManyWithoutListingInput = {
+    create?: XOR<RequestCreateWithoutListingInput, RequestUncheckedCreateWithoutListingInput> | RequestCreateWithoutListingInput[] | RequestUncheckedCreateWithoutListingInput[]
+    connectOrCreate?: RequestCreateOrConnectWithoutListingInput | RequestCreateOrConnectWithoutListingInput[]
+    createMany?: RequestCreateManyListingInputEnvelope
+    connect?: RequestWhereUniqueInput | RequestWhereUniqueInput[]
+  }
+
+  export type FavoriteUncheckedCreateNestedManyWithoutListingInput = {
+    create?: XOR<FavoriteCreateWithoutListingInput, FavoriteUncheckedCreateWithoutListingInput> | FavoriteCreateWithoutListingInput[] | FavoriteUncheckedCreateWithoutListingInput[]
+    connectOrCreate?: FavoriteCreateOrConnectWithoutListingInput | FavoriteCreateOrConnectWithoutListingInput[]
+    createMany?: FavoriteCreateManyListingInputEnvelope
+    connect?: FavoriteWhereUniqueInput | FavoriteWhereUniqueInput[]
   }
 
   export type FloatFieldUpdateOperationsInput = {
@@ -3920,10 +6623,6 @@ export namespace Prisma {
 
   export type EnumCategoryFieldUpdateOperationsInput = {
     set?: $Enums.Category
-  }
-
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
   }
 
   export type NullableIntFieldUpdateOperationsInput = {
@@ -3946,6 +6645,118 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutListingsInput, UserUpdateWithoutListingsInput>, UserUncheckedUpdateWithoutListingsInput>
   }
 
+  export type RequestUpdateManyWithoutListingNestedInput = {
+    create?: XOR<RequestCreateWithoutListingInput, RequestUncheckedCreateWithoutListingInput> | RequestCreateWithoutListingInput[] | RequestUncheckedCreateWithoutListingInput[]
+    connectOrCreate?: RequestCreateOrConnectWithoutListingInput | RequestCreateOrConnectWithoutListingInput[]
+    upsert?: RequestUpsertWithWhereUniqueWithoutListingInput | RequestUpsertWithWhereUniqueWithoutListingInput[]
+    createMany?: RequestCreateManyListingInputEnvelope
+    set?: RequestWhereUniqueInput | RequestWhereUniqueInput[]
+    disconnect?: RequestWhereUniqueInput | RequestWhereUniqueInput[]
+    delete?: RequestWhereUniqueInput | RequestWhereUniqueInput[]
+    connect?: RequestWhereUniqueInput | RequestWhereUniqueInput[]
+    update?: RequestUpdateWithWhereUniqueWithoutListingInput | RequestUpdateWithWhereUniqueWithoutListingInput[]
+    updateMany?: RequestUpdateManyWithWhereWithoutListingInput | RequestUpdateManyWithWhereWithoutListingInput[]
+    deleteMany?: RequestScalarWhereInput | RequestScalarWhereInput[]
+  }
+
+  export type FavoriteUpdateManyWithoutListingNestedInput = {
+    create?: XOR<FavoriteCreateWithoutListingInput, FavoriteUncheckedCreateWithoutListingInput> | FavoriteCreateWithoutListingInput[] | FavoriteUncheckedCreateWithoutListingInput[]
+    connectOrCreate?: FavoriteCreateOrConnectWithoutListingInput | FavoriteCreateOrConnectWithoutListingInput[]
+    upsert?: FavoriteUpsertWithWhereUniqueWithoutListingInput | FavoriteUpsertWithWhereUniqueWithoutListingInput[]
+    createMany?: FavoriteCreateManyListingInputEnvelope
+    set?: FavoriteWhereUniqueInput | FavoriteWhereUniqueInput[]
+    disconnect?: FavoriteWhereUniqueInput | FavoriteWhereUniqueInput[]
+    delete?: FavoriteWhereUniqueInput | FavoriteWhereUniqueInput[]
+    connect?: FavoriteWhereUniqueInput | FavoriteWhereUniqueInput[]
+    update?: FavoriteUpdateWithWhereUniqueWithoutListingInput | FavoriteUpdateWithWhereUniqueWithoutListingInput[]
+    updateMany?: FavoriteUpdateManyWithWhereWithoutListingInput | FavoriteUpdateManyWithWhereWithoutListingInput[]
+    deleteMany?: FavoriteScalarWhereInput | FavoriteScalarWhereInput[]
+  }
+
+  export type RequestUncheckedUpdateManyWithoutListingNestedInput = {
+    create?: XOR<RequestCreateWithoutListingInput, RequestUncheckedCreateWithoutListingInput> | RequestCreateWithoutListingInput[] | RequestUncheckedCreateWithoutListingInput[]
+    connectOrCreate?: RequestCreateOrConnectWithoutListingInput | RequestCreateOrConnectWithoutListingInput[]
+    upsert?: RequestUpsertWithWhereUniqueWithoutListingInput | RequestUpsertWithWhereUniqueWithoutListingInput[]
+    createMany?: RequestCreateManyListingInputEnvelope
+    set?: RequestWhereUniqueInput | RequestWhereUniqueInput[]
+    disconnect?: RequestWhereUniqueInput | RequestWhereUniqueInput[]
+    delete?: RequestWhereUniqueInput | RequestWhereUniqueInput[]
+    connect?: RequestWhereUniqueInput | RequestWhereUniqueInput[]
+    update?: RequestUpdateWithWhereUniqueWithoutListingInput | RequestUpdateWithWhereUniqueWithoutListingInput[]
+    updateMany?: RequestUpdateManyWithWhereWithoutListingInput | RequestUpdateManyWithWhereWithoutListingInput[]
+    deleteMany?: RequestScalarWhereInput | RequestScalarWhereInput[]
+  }
+
+  export type FavoriteUncheckedUpdateManyWithoutListingNestedInput = {
+    create?: XOR<FavoriteCreateWithoutListingInput, FavoriteUncheckedCreateWithoutListingInput> | FavoriteCreateWithoutListingInput[] | FavoriteUncheckedCreateWithoutListingInput[]
+    connectOrCreate?: FavoriteCreateOrConnectWithoutListingInput | FavoriteCreateOrConnectWithoutListingInput[]
+    upsert?: FavoriteUpsertWithWhereUniqueWithoutListingInput | FavoriteUpsertWithWhereUniqueWithoutListingInput[]
+    createMany?: FavoriteCreateManyListingInputEnvelope
+    set?: FavoriteWhereUniqueInput | FavoriteWhereUniqueInput[]
+    disconnect?: FavoriteWhereUniqueInput | FavoriteWhereUniqueInput[]
+    delete?: FavoriteWhereUniqueInput | FavoriteWhereUniqueInput[]
+    connect?: FavoriteWhereUniqueInput | FavoriteWhereUniqueInput[]
+    update?: FavoriteUpdateWithWhereUniqueWithoutListingInput | FavoriteUpdateWithWhereUniqueWithoutListingInput[]
+    updateMany?: FavoriteUpdateManyWithWhereWithoutListingInput | FavoriteUpdateManyWithWhereWithoutListingInput[]
+    deleteMany?: FavoriteScalarWhereInput | FavoriteScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutRequestsInput = {
+    create?: XOR<UserCreateWithoutRequestsInput, UserUncheckedCreateWithoutRequestsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutRequestsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type ListingCreateNestedOneWithoutRequestsInput = {
+    create?: XOR<ListingCreateWithoutRequestsInput, ListingUncheckedCreateWithoutRequestsInput>
+    connectOrCreate?: ListingCreateOrConnectWithoutRequestsInput
+    connect?: ListingWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutRequestsNestedInput = {
+    create?: XOR<UserCreateWithoutRequestsInput, UserUncheckedCreateWithoutRequestsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutRequestsInput
+    upsert?: UserUpsertWithoutRequestsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutRequestsInput, UserUpdateWithoutRequestsInput>, UserUncheckedUpdateWithoutRequestsInput>
+  }
+
+  export type ListingUpdateOneRequiredWithoutRequestsNestedInput = {
+    create?: XOR<ListingCreateWithoutRequestsInput, ListingUncheckedCreateWithoutRequestsInput>
+    connectOrCreate?: ListingCreateOrConnectWithoutRequestsInput
+    upsert?: ListingUpsertWithoutRequestsInput
+    connect?: ListingWhereUniqueInput
+    update?: XOR<XOR<ListingUpdateToOneWithWhereWithoutRequestsInput, ListingUpdateWithoutRequestsInput>, ListingUncheckedUpdateWithoutRequestsInput>
+  }
+
+  export type UserCreateNestedOneWithoutFavoritesInput = {
+    create?: XOR<UserCreateWithoutFavoritesInput, UserUncheckedCreateWithoutFavoritesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutFavoritesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type ListingCreateNestedOneWithoutFavoritesInput = {
+    create?: XOR<ListingCreateWithoutFavoritesInput, ListingUncheckedCreateWithoutFavoritesInput>
+    connectOrCreate?: ListingCreateOrConnectWithoutFavoritesInput
+    connect?: ListingWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutFavoritesNestedInput = {
+    create?: XOR<UserCreateWithoutFavoritesInput, UserUncheckedCreateWithoutFavoritesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutFavoritesInput
+    upsert?: UserUpsertWithoutFavoritesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutFavoritesInput, UserUpdateWithoutFavoritesInput>, UserUncheckedUpdateWithoutFavoritesInput>
+  }
+
+  export type ListingUpdateOneRequiredWithoutFavoritesNestedInput = {
+    create?: XOR<ListingCreateWithoutFavoritesInput, ListingUncheckedCreateWithoutFavoritesInput>
+    connectOrCreate?: ListingCreateOrConnectWithoutFavoritesInput
+    upsert?: ListingUpsertWithoutFavoritesInput
+    connect?: ListingWhereUniqueInput
+    update?: XOR<XOR<ListingUpdateToOneWithWhereWithoutFavoritesInput, ListingUpdateWithoutFavoritesInput>, ListingUncheckedUpdateWithoutFavoritesInput>
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -3958,6 +6769,20 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type NestedEnumRoleFilter<$PrismaModel = never> = {
@@ -4006,6 +6831,34 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type NestedEnumRoleWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
     in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
@@ -4048,31 +6901,6 @@ export namespace Prisma {
     not?: NestedEnumCategoryFilter<$PrismaModel> | $Enums.Category
   }
 
-  export type NestedStringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
   export type NestedBoolFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolFilter<$PrismaModel> | boolean
@@ -4102,23 +6930,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumCategoryFilter<$PrismaModel>
     _max?: NestedEnumCategoryFilter<$PrismaModel>
-  }
-
-  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -4171,6 +6982,8 @@ export namespace Prisma {
     images?: string | null
     isAvailable?: boolean
     createdAt?: Date | string
+    requests?: RequestCreateNestedManyWithoutListingInput
+    favorites?: FavoriteCreateNestedManyWithoutListingInput
   }
 
   export type ListingUncheckedCreateWithoutUserInput = {
@@ -4188,6 +7001,8 @@ export namespace Prisma {
     images?: string | null
     isAvailable?: boolean
     createdAt?: Date | string
+    requests?: RequestUncheckedCreateNestedManyWithoutListingInput
+    favorites?: FavoriteUncheckedCreateNestedManyWithoutListingInput
   }
 
   export type ListingCreateOrConnectWithoutUserInput = {
@@ -4197,6 +7012,52 @@ export namespace Prisma {
 
   export type ListingCreateManyUserInputEnvelope = {
     data: ListingCreateManyUserInput | ListingCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type RequestCreateWithoutUserInput = {
+    id?: string
+    status?: string
+    createdAt?: Date | string
+    listing: ListingCreateNestedOneWithoutRequestsInput
+  }
+
+  export type RequestUncheckedCreateWithoutUserInput = {
+    id?: string
+    status?: string
+    listingId: string
+    createdAt?: Date | string
+  }
+
+  export type RequestCreateOrConnectWithoutUserInput = {
+    where: RequestWhereUniqueInput
+    create: XOR<RequestCreateWithoutUserInput, RequestUncheckedCreateWithoutUserInput>
+  }
+
+  export type RequestCreateManyUserInputEnvelope = {
+    data: RequestCreateManyUserInput | RequestCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type FavoriteCreateWithoutUserInput = {
+    id?: string
+    createdAt?: Date | string
+    listing: ListingCreateNestedOneWithoutFavoritesInput
+  }
+
+  export type FavoriteUncheckedCreateWithoutUserInput = {
+    id?: string
+    listingId: string
+    createdAt?: Date | string
+  }
+
+  export type FavoriteCreateOrConnectWithoutUserInput = {
+    where: FavoriteWhereUniqueInput
+    create: XOR<FavoriteCreateWithoutUserInput, FavoriteUncheckedCreateWithoutUserInput>
+  }
+
+  export type FavoriteCreateManyUserInputEnvelope = {
+    data: FavoriteCreateManyUserInput | FavoriteCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -4237,25 +7098,132 @@ export namespace Prisma {
     userId?: StringFilter<"Listing"> | string
   }
 
+  export type RequestUpsertWithWhereUniqueWithoutUserInput = {
+    where: RequestWhereUniqueInput
+    update: XOR<RequestUpdateWithoutUserInput, RequestUncheckedUpdateWithoutUserInput>
+    create: XOR<RequestCreateWithoutUserInput, RequestUncheckedCreateWithoutUserInput>
+  }
+
+  export type RequestUpdateWithWhereUniqueWithoutUserInput = {
+    where: RequestWhereUniqueInput
+    data: XOR<RequestUpdateWithoutUserInput, RequestUncheckedUpdateWithoutUserInput>
+  }
+
+  export type RequestUpdateManyWithWhereWithoutUserInput = {
+    where: RequestScalarWhereInput
+    data: XOR<RequestUpdateManyMutationInput, RequestUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type RequestScalarWhereInput = {
+    AND?: RequestScalarWhereInput | RequestScalarWhereInput[]
+    OR?: RequestScalarWhereInput[]
+    NOT?: RequestScalarWhereInput | RequestScalarWhereInput[]
+    id?: StringFilter<"Request"> | string
+    status?: StringFilter<"Request"> | string
+    userId?: StringFilter<"Request"> | string
+    listingId?: StringFilter<"Request"> | string
+    createdAt?: DateTimeFilter<"Request"> | Date | string
+  }
+
+  export type FavoriteUpsertWithWhereUniqueWithoutUserInput = {
+    where: FavoriteWhereUniqueInput
+    update: XOR<FavoriteUpdateWithoutUserInput, FavoriteUncheckedUpdateWithoutUserInput>
+    create: XOR<FavoriteCreateWithoutUserInput, FavoriteUncheckedCreateWithoutUserInput>
+  }
+
+  export type FavoriteUpdateWithWhereUniqueWithoutUserInput = {
+    where: FavoriteWhereUniqueInput
+    data: XOR<FavoriteUpdateWithoutUserInput, FavoriteUncheckedUpdateWithoutUserInput>
+  }
+
+  export type FavoriteUpdateManyWithWhereWithoutUserInput = {
+    where: FavoriteScalarWhereInput
+    data: XOR<FavoriteUpdateManyMutationInput, FavoriteUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type FavoriteScalarWhereInput = {
+    AND?: FavoriteScalarWhereInput | FavoriteScalarWhereInput[]
+    OR?: FavoriteScalarWhereInput[]
+    NOT?: FavoriteScalarWhereInput | FavoriteScalarWhereInput[]
+    id?: StringFilter<"Favorite"> | string
+    userId?: StringFilter<"Favorite"> | string
+    listingId?: StringFilter<"Favorite"> | string
+    createdAt?: DateTimeFilter<"Favorite"> | Date | string
+  }
+
   export type UserCreateWithoutListingsInput = {
     id?: string
+    firstName?: string | null
+    lastName?: string | null
     email: string
     password: string
     role?: $Enums.Role
     createdAt?: Date | string
+    requests?: RequestCreateNestedManyWithoutUserInput
+    favorites?: FavoriteCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutListingsInput = {
     id?: string
+    firstName?: string | null
+    lastName?: string | null
     email: string
     password: string
     role?: $Enums.Role
     createdAt?: Date | string
+    requests?: RequestUncheckedCreateNestedManyWithoutUserInput
+    favorites?: FavoriteUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutListingsInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutListingsInput, UserUncheckedCreateWithoutListingsInput>
+  }
+
+  export type RequestCreateWithoutListingInput = {
+    id?: string
+    status?: string
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutRequestsInput
+  }
+
+  export type RequestUncheckedCreateWithoutListingInput = {
+    id?: string
+    status?: string
+    userId: string
+    createdAt?: Date | string
+  }
+
+  export type RequestCreateOrConnectWithoutListingInput = {
+    where: RequestWhereUniqueInput
+    create: XOR<RequestCreateWithoutListingInput, RequestUncheckedCreateWithoutListingInput>
+  }
+
+  export type RequestCreateManyListingInputEnvelope = {
+    data: RequestCreateManyListingInput | RequestCreateManyListingInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type FavoriteCreateWithoutListingInput = {
+    id?: string
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutFavoritesInput
+  }
+
+  export type FavoriteUncheckedCreateWithoutListingInput = {
+    id?: string
+    userId: string
+    createdAt?: Date | string
+  }
+
+  export type FavoriteCreateOrConnectWithoutListingInput = {
+    where: FavoriteWhereUniqueInput
+    create: XOR<FavoriteCreateWithoutListingInput, FavoriteUncheckedCreateWithoutListingInput>
+  }
+
+  export type FavoriteCreateManyListingInputEnvelope = {
+    data: FavoriteCreateManyListingInput | FavoriteCreateManyListingInput[]
+    skipDuplicates?: boolean
   }
 
   export type UserUpsertWithoutListingsInput = {
@@ -4271,18 +7239,370 @@ export namespace Prisma {
 
   export type UserUpdateWithoutListingsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    requests?: RequestUpdateManyWithoutUserNestedInput
+    favorites?: FavoriteUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutListingsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    requests?: RequestUncheckedUpdateManyWithoutUserNestedInput
+    favorites?: FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type RequestUpsertWithWhereUniqueWithoutListingInput = {
+    where: RequestWhereUniqueInput
+    update: XOR<RequestUpdateWithoutListingInput, RequestUncheckedUpdateWithoutListingInput>
+    create: XOR<RequestCreateWithoutListingInput, RequestUncheckedCreateWithoutListingInput>
+  }
+
+  export type RequestUpdateWithWhereUniqueWithoutListingInput = {
+    where: RequestWhereUniqueInput
+    data: XOR<RequestUpdateWithoutListingInput, RequestUncheckedUpdateWithoutListingInput>
+  }
+
+  export type RequestUpdateManyWithWhereWithoutListingInput = {
+    where: RequestScalarWhereInput
+    data: XOR<RequestUpdateManyMutationInput, RequestUncheckedUpdateManyWithoutListingInput>
+  }
+
+  export type FavoriteUpsertWithWhereUniqueWithoutListingInput = {
+    where: FavoriteWhereUniqueInput
+    update: XOR<FavoriteUpdateWithoutListingInput, FavoriteUncheckedUpdateWithoutListingInput>
+    create: XOR<FavoriteCreateWithoutListingInput, FavoriteUncheckedCreateWithoutListingInput>
+  }
+
+  export type FavoriteUpdateWithWhereUniqueWithoutListingInput = {
+    where: FavoriteWhereUniqueInput
+    data: XOR<FavoriteUpdateWithoutListingInput, FavoriteUncheckedUpdateWithoutListingInput>
+  }
+
+  export type FavoriteUpdateManyWithWhereWithoutListingInput = {
+    where: FavoriteScalarWhereInput
+    data: XOR<FavoriteUpdateManyMutationInput, FavoriteUncheckedUpdateManyWithoutListingInput>
+  }
+
+  export type UserCreateWithoutRequestsInput = {
+    id?: string
+    firstName?: string | null
+    lastName?: string | null
+    email: string
+    password: string
+    role?: $Enums.Role
+    createdAt?: Date | string
+    listings?: ListingCreateNestedManyWithoutUserInput
+    favorites?: FavoriteCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutRequestsInput = {
+    id?: string
+    firstName?: string | null
+    lastName?: string | null
+    email: string
+    password: string
+    role?: $Enums.Role
+    createdAt?: Date | string
+    listings?: ListingUncheckedCreateNestedManyWithoutUserInput
+    favorites?: FavoriteUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutRequestsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutRequestsInput, UserUncheckedCreateWithoutRequestsInput>
+  }
+
+  export type ListingCreateWithoutRequestsInput = {
+    id?: string
+    title: string
+    description: string
+    price: number
+    category: $Enums.Category
+    brand?: string | null
+    model?: string | null
+    year?: number | null
+    kilometers?: number | null
+    fuel?: string | null
+    transmission?: string | null
+    images?: string | null
+    isAvailable?: boolean
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutListingsInput
+    favorites?: FavoriteCreateNestedManyWithoutListingInput
+  }
+
+  export type ListingUncheckedCreateWithoutRequestsInput = {
+    id?: string
+    title: string
+    description: string
+    price: number
+    category: $Enums.Category
+    brand?: string | null
+    model?: string | null
+    year?: number | null
+    kilometers?: number | null
+    fuel?: string | null
+    transmission?: string | null
+    images?: string | null
+    isAvailable?: boolean
+    createdAt?: Date | string
+    userId: string
+    favorites?: FavoriteUncheckedCreateNestedManyWithoutListingInput
+  }
+
+  export type ListingCreateOrConnectWithoutRequestsInput = {
+    where: ListingWhereUniqueInput
+    create: XOR<ListingCreateWithoutRequestsInput, ListingUncheckedCreateWithoutRequestsInput>
+  }
+
+  export type UserUpsertWithoutRequestsInput = {
+    update: XOR<UserUpdateWithoutRequestsInput, UserUncheckedUpdateWithoutRequestsInput>
+    create: XOR<UserCreateWithoutRequestsInput, UserUncheckedCreateWithoutRequestsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutRequestsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutRequestsInput, UserUncheckedUpdateWithoutRequestsInput>
+  }
+
+  export type UserUpdateWithoutRequestsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    listings?: ListingUpdateManyWithoutUserNestedInput
+    favorites?: FavoriteUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutRequestsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    listings?: ListingUncheckedUpdateManyWithoutUserNestedInput
+    favorites?: FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type ListingUpsertWithoutRequestsInput = {
+    update: XOR<ListingUpdateWithoutRequestsInput, ListingUncheckedUpdateWithoutRequestsInput>
+    create: XOR<ListingCreateWithoutRequestsInput, ListingUncheckedCreateWithoutRequestsInput>
+    where?: ListingWhereInput
+  }
+
+  export type ListingUpdateToOneWithWhereWithoutRequestsInput = {
+    where?: ListingWhereInput
+    data: XOR<ListingUpdateWithoutRequestsInput, ListingUncheckedUpdateWithoutRequestsInput>
+  }
+
+  export type ListingUpdateWithoutRequestsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    price?: FloatFieldUpdateOperationsInput | number
+    category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
+    brand?: NullableStringFieldUpdateOperationsInput | string | null
+    model?: NullableStringFieldUpdateOperationsInput | string | null
+    year?: NullableIntFieldUpdateOperationsInput | number | null
+    kilometers?: NullableIntFieldUpdateOperationsInput | number | null
+    fuel?: NullableStringFieldUpdateOperationsInput | string | null
+    transmission?: NullableStringFieldUpdateOperationsInput | string | null
+    images?: NullableStringFieldUpdateOperationsInput | string | null
+    isAvailable?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutListingsNestedInput
+    favorites?: FavoriteUpdateManyWithoutListingNestedInput
+  }
+
+  export type ListingUncheckedUpdateWithoutRequestsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    price?: FloatFieldUpdateOperationsInput | number
+    category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
+    brand?: NullableStringFieldUpdateOperationsInput | string | null
+    model?: NullableStringFieldUpdateOperationsInput | string | null
+    year?: NullableIntFieldUpdateOperationsInput | number | null
+    kilometers?: NullableIntFieldUpdateOperationsInput | number | null
+    fuel?: NullableStringFieldUpdateOperationsInput | string | null
+    transmission?: NullableStringFieldUpdateOperationsInput | string | null
+    images?: NullableStringFieldUpdateOperationsInput | string | null
+    isAvailable?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
+    favorites?: FavoriteUncheckedUpdateManyWithoutListingNestedInput
+  }
+
+  export type UserCreateWithoutFavoritesInput = {
+    id?: string
+    firstName?: string | null
+    lastName?: string | null
+    email: string
+    password: string
+    role?: $Enums.Role
+    createdAt?: Date | string
+    listings?: ListingCreateNestedManyWithoutUserInput
+    requests?: RequestCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutFavoritesInput = {
+    id?: string
+    firstName?: string | null
+    lastName?: string | null
+    email: string
+    password: string
+    role?: $Enums.Role
+    createdAt?: Date | string
+    listings?: ListingUncheckedCreateNestedManyWithoutUserInput
+    requests?: RequestUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutFavoritesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutFavoritesInput, UserUncheckedCreateWithoutFavoritesInput>
+  }
+
+  export type ListingCreateWithoutFavoritesInput = {
+    id?: string
+    title: string
+    description: string
+    price: number
+    category: $Enums.Category
+    brand?: string | null
+    model?: string | null
+    year?: number | null
+    kilometers?: number | null
+    fuel?: string | null
+    transmission?: string | null
+    images?: string | null
+    isAvailable?: boolean
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutListingsInput
+    requests?: RequestCreateNestedManyWithoutListingInput
+  }
+
+  export type ListingUncheckedCreateWithoutFavoritesInput = {
+    id?: string
+    title: string
+    description: string
+    price: number
+    category: $Enums.Category
+    brand?: string | null
+    model?: string | null
+    year?: number | null
+    kilometers?: number | null
+    fuel?: string | null
+    transmission?: string | null
+    images?: string | null
+    isAvailable?: boolean
+    createdAt?: Date | string
+    userId: string
+    requests?: RequestUncheckedCreateNestedManyWithoutListingInput
+  }
+
+  export type ListingCreateOrConnectWithoutFavoritesInput = {
+    where: ListingWhereUniqueInput
+    create: XOR<ListingCreateWithoutFavoritesInput, ListingUncheckedCreateWithoutFavoritesInput>
+  }
+
+  export type UserUpsertWithoutFavoritesInput = {
+    update: XOR<UserUpdateWithoutFavoritesInput, UserUncheckedUpdateWithoutFavoritesInput>
+    create: XOR<UserCreateWithoutFavoritesInput, UserUncheckedCreateWithoutFavoritesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutFavoritesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutFavoritesInput, UserUncheckedUpdateWithoutFavoritesInput>
+  }
+
+  export type UserUpdateWithoutFavoritesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    listings?: ListingUpdateManyWithoutUserNestedInput
+    requests?: RequestUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutFavoritesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    listings?: ListingUncheckedUpdateManyWithoutUserNestedInput
+    requests?: RequestUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type ListingUpsertWithoutFavoritesInput = {
+    update: XOR<ListingUpdateWithoutFavoritesInput, ListingUncheckedUpdateWithoutFavoritesInput>
+    create: XOR<ListingCreateWithoutFavoritesInput, ListingUncheckedCreateWithoutFavoritesInput>
+    where?: ListingWhereInput
+  }
+
+  export type ListingUpdateToOneWithWhereWithoutFavoritesInput = {
+    where?: ListingWhereInput
+    data: XOR<ListingUpdateWithoutFavoritesInput, ListingUncheckedUpdateWithoutFavoritesInput>
+  }
+
+  export type ListingUpdateWithoutFavoritesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    price?: FloatFieldUpdateOperationsInput | number
+    category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
+    brand?: NullableStringFieldUpdateOperationsInput | string | null
+    model?: NullableStringFieldUpdateOperationsInput | string | null
+    year?: NullableIntFieldUpdateOperationsInput | number | null
+    kilometers?: NullableIntFieldUpdateOperationsInput | number | null
+    fuel?: NullableStringFieldUpdateOperationsInput | string | null
+    transmission?: NullableStringFieldUpdateOperationsInput | string | null
+    images?: NullableStringFieldUpdateOperationsInput | string | null
+    isAvailable?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutListingsNestedInput
+    requests?: RequestUpdateManyWithoutListingNestedInput
+  }
+
+  export type ListingUncheckedUpdateWithoutFavoritesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    price?: FloatFieldUpdateOperationsInput | number
+    category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
+    brand?: NullableStringFieldUpdateOperationsInput | string | null
+    model?: NullableStringFieldUpdateOperationsInput | string | null
+    year?: NullableIntFieldUpdateOperationsInput | number | null
+    kilometers?: NullableIntFieldUpdateOperationsInput | number | null
+    fuel?: NullableStringFieldUpdateOperationsInput | string | null
+    transmission?: NullableStringFieldUpdateOperationsInput | string | null
+    images?: NullableStringFieldUpdateOperationsInput | string | null
+    isAvailable?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
+    requests?: RequestUncheckedUpdateManyWithoutListingNestedInput
   }
 
   export type ListingCreateManyUserInput = {
@@ -4302,6 +7622,19 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
+  export type RequestCreateManyUserInput = {
+    id?: string
+    status?: string
+    listingId: string
+    createdAt?: Date | string
+  }
+
+  export type FavoriteCreateManyUserInput = {
+    id?: string
+    listingId: string
+    createdAt?: Date | string
+  }
+
   export type ListingUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
@@ -4317,6 +7650,8 @@ export namespace Prisma {
     images?: NullableStringFieldUpdateOperationsInput | string | null
     isAvailable?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    requests?: RequestUpdateManyWithoutListingNestedInput
+    favorites?: FavoriteUpdateManyWithoutListingNestedInput
   }
 
   export type ListingUncheckedUpdateWithoutUserInput = {
@@ -4334,6 +7669,8 @@ export namespace Prisma {
     images?: NullableStringFieldUpdateOperationsInput | string | null
     isAvailable?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    requests?: RequestUncheckedUpdateManyWithoutListingNestedInput
+    favorites?: FavoriteUncheckedUpdateManyWithoutListingNestedInput
   }
 
   export type ListingUncheckedUpdateManyWithoutUserInput = {
@@ -4353,6 +7690,97 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type RequestUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    listing?: ListingUpdateOneRequiredWithoutRequestsNestedInput
+  }
+
+  export type RequestUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    listingId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RequestUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    listingId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FavoriteUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    listing?: ListingUpdateOneRequiredWithoutFavoritesNestedInput
+  }
+
+  export type FavoriteUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    listingId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FavoriteUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    listingId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RequestCreateManyListingInput = {
+    id?: string
+    status?: string
+    userId: string
+    createdAt?: Date | string
+  }
+
+  export type FavoriteCreateManyListingInput = {
+    id?: string
+    userId: string
+    createdAt?: Date | string
+  }
+
+  export type RequestUpdateWithoutListingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutRequestsNestedInput
+  }
+
+  export type RequestUncheckedUpdateWithoutListingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RequestUncheckedUpdateManyWithoutListingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FavoriteUpdateWithoutListingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutFavoritesNestedInput
+  }
+
+  export type FavoriteUncheckedUpdateWithoutListingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FavoriteUncheckedUpdateManyWithoutListingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
 
 
   /**
@@ -4363,6 +7791,10 @@ export namespace Prisma {
      */
     export type UserCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UserCountOutputTypeDefaultArgs<ExtArgs>
     /**
+     * @deprecated Use ListingCountOutputTypeDefaultArgs instead
+     */
+    export type ListingCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ListingCountOutputTypeDefaultArgs<ExtArgs>
+    /**
      * @deprecated Use UserDefaultArgs instead
      */
     export type UserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UserDefaultArgs<ExtArgs>
@@ -4370,6 +7802,14 @@ export namespace Prisma {
      * @deprecated Use ListingDefaultArgs instead
      */
     export type ListingArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ListingDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use RequestDefaultArgs instead
+     */
+    export type RequestArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = RequestDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use FavoriteDefaultArgs instead
+     */
+    export type FavoriteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = FavoriteDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany

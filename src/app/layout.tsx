@@ -18,6 +18,7 @@ export const metadata: Metadata = {
 };
 
 import ClientProviders from "@/components/ClientProviders";
+import Footer from "@/components/Footer";
 
 export default function RootLayout({
   children,
@@ -27,10 +28,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
       >
         <ClientProviders>
           {children}
+          <Footer />
         </ClientProviders>
       </body>
     </html>

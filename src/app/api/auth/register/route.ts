@@ -4,11 +4,11 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
-    const { email, password, name } = await req.json();
+    const { email, password, firstName, lastName } = await req.json();
 
-    if (!email || !password) {
+    if (!email || !password || !firstName || !lastName) {
       return NextResponse.json(
-        { message: "Email ve şifre zorunludur" },
+        { message: "Tüm alanları eksiksiz doldurunuz." },
         { status: 400 }
       );
     }
@@ -30,8 +30,8 @@ export async function POST(req: Request) {
       data: {
         email,
         password: hashedPassword,
-        // Optional name field mapped if schema supports it, but our proposed schema only has email, password, role.
-        // We'll stick strictly to the schema provided: email, password, role="USER".
+        firstName,
+        lastName
       },
     });
 

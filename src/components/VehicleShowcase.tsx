@@ -27,6 +27,29 @@ export default function VehicleShowcase({ initialVehicles }: Props) {
   const [selectedTransmission, setSelectedTransmission] = useState<string | null>(null);
   const [selectedType, setSelectedType] = useState<string | null>(null);
 
+  const getCarImage = (car: Vehicle) => {
+    let src = "";
+    if (car.images) {
+      try {
+        const parsed = JSON.parse(car.images);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          src = parsed[0];
+        } else {
+          src = car.images;
+        }
+      } catch (e) {
+        src = car.images;
+      }
+    } else {
+      src = `/cars/${car.brand}_${(car.model || '').replace(/\s+/g, '_')}.jpg`;
+    }
+
+    if (src && (src.startsWith("/") || src.startsWith("http://") || src.startsWith("https://"))) {
+      return src;
+    }
+    return `/cars/${car.brand}_${(car.model || '').replace(/\s+/g, '_')}.jpg`;
+  };
+
   // Filter vehicles by selected states
   const displayedVehicles = initialVehicles.filter(v => {
     if (selectedBrand && v.brand !== selectedBrand) return false;
@@ -113,7 +136,7 @@ export default function VehicleShowcase({ initialVehicles }: Props) {
             Toplam <span className="text-orange-500 font-bold">{displayedVehicles.length}</span> araç listeleniyor
           </p>
         </div>
-        <button className="text-orange-500 hover:text-orange-400 font-medium hidden sm:block transition-colors">Tümünü gör &rarr;</button>
+        <Link href="/araclar" className="text-orange-500 hover:text-orange-400 font-medium hidden sm:block transition-colors">Tümünü gör &rarr;</Link>
       </div>
 
       {/* Grid */}
@@ -126,12 +149,17 @@ export default function VehicleShowcase({ initialVehicles }: Props) {
             style={{ animationDelay: `${index * 100}ms` }}
           >
             <div className="aspect-[4/3] bg-neutral-800 relative w-full overflow-hidden">
+              {!car.isAvailable && (
+                <div className="absolute top-4 -right-10 z-20 bg-red-600 text-white font-black py-1 px-12 transform rotate-45 shadow-2xl border-y-2 border-red-500/50 text-xs">
+                  SATILDI
+                </div>
+              )}
                {/* 
                  For a real effect, we're using a gradient + brand logo as a placeholder for the real car image 
                */}
-              <div className="absolute inset-0 bg-neutral-800 flex items-center justify-center opacity-80 group-hover:opacity-100 transition-opacity">
+              <div className={`absolute inset-0 bg-neutral-800 flex items-center justify-center opacity-80 group-hover:opacity-100 transition-opacity ${!car.isAvailable ? 'grayscale opacity-50 view-sold' : ''}`}>
                 <Image 
-                  src={`/cars/${car.brand}_${car.model.replace(/\s+/g, '_')}.jpg`}
+                  src={getCarImage(car)}
                   alt={`${car.brand} ${car.model}`}
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-110"

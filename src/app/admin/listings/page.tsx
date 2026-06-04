@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import Link from "next/link";
 
 export default async function ListingsPage() {
   const listings = await prisma.listing.findMany({
@@ -10,9 +11,9 @@ export default async function ListingsPage() {
     <div>
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold text-white">İlan Yönetimi</h1>
-        <button className="bg-orange-600 hover:bg-orange-500 text-white px-6 py-3 rounded-xl font-bold transition-all shadow-lg hover:shadow-orange-500/20 active:scale-95">
+        <Link href="/admin/listings/new" className="bg-orange-600 hover:bg-orange-500 text-white px-6 py-3 rounded-xl font-bold transition-all shadow-lg hover:shadow-orange-500/20 active:scale-95">
           Admin Olarak İlan Ekle
-        </button>
+        </Link>
       </div>
 
       <div className="bg-neutral-900 rounded-2xl overflow-hidden border border-neutral-800">
@@ -54,9 +55,9 @@ export default async function ListingsPage() {
                   {l.user?.email || 'Bilinmiyor'}
                 </td>
                 <td className="p-4 text-right">
-                   <button className="text-sm font-semibold text-orange-500 hover:text-orange-400 mr-2">Görüntüle</button>
+                   <Link href={`/admin/listings/edit/${l.id}`} className="text-sm font-semibold text-orange-500 hover:text-orange-400 mr-2">Düzenle</Link>
                    <span className="text-neutral-600 mx-2">|</span>
-                   <button className="text-sm font-semibold text-red-500 hover:text-red-400">Arşive Al / Sil</button>
+                   <button className="text-sm font-semibold text-red-500 hover:text-red-400">Sil</button>
                 </td>
               </tr>
             ))}

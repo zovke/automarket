@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-
+import UserActions from "./UserActions";
 export default async function UsersPage() {
   const users = await prisma.user.findMany({
     orderBy: { createdAt: "desc" }
@@ -24,7 +24,10 @@ export default async function UsersPage() {
           <tbody>
             {users.map(u => (
               <tr key={u.id} className="border-t border-neutral-800 hover:bg-neutral-800/30 transition-colors">
-                <td className="p-4 font-medium">{u.email}</td>
+                <td className="p-4">
+                  <div className="font-bold text-white">{u.firstName} {u.lastName}</div>
+                  <div className="text-sm text-neutral-400">{u.email}</div>
+                </td>
                 <td className="p-4 text-neutral-400">
                   {new Date(u.createdAt).toLocaleDateString("tr-TR")}
                 </td>
@@ -38,9 +41,7 @@ export default async function UsersPage() {
                   </span>
                 </td>
                 <td className="p-4 text-right">
-                   <button className="text-sm font-semibold text-orange-500 hover:text-orange-400">Düzenle</button>
-                   <span className="text-neutral-600 mx-2">|</span>
-                   <button className="text-sm font-semibold text-red-500 hover:text-red-400">Sil</button>
+                   <UserActions userId={u.id} currentRole={u.role} />
                 </td>
               </tr>
             ))}

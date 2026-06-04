@@ -1,5 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import VehicleShowcase from "@/components/VehicleShowcase";
+import Link from "next/link";
+import Navbar from "@/components/Navbar";
 
 export default async function Home() {
   const listings = await prisma.listing.findMany({
@@ -16,26 +18,7 @@ export default async function Home() {
   return (
     <div className="min-h-screen bg-neutral-950 text-neutral-50 font-sans selection:bg-orange-500/30">
       {/* Navbar Section */}
-      <nav className="flex items-center justify-between p-6 max-w-7xl mx-auto border-b border-neutral-900/50">
-        <div className="font-black text-2xl tracking-tighter cursor-pointer flex items-center gap-1">
-          <div className="w-8 h-8 bg-gradient-to-br from-orange-500 to-orange-700 rounded-lg flex items-center justify-center shadow-lg shadow-orange-500/20">
-            <span className="text-white text-lg">A</span>
-          </div>
-          AUTO<span className="text-orange-500">MARKET</span>
-        </div>
-        <div className="hidden md:flex gap-8 font-medium text-sm text-neutral-300">
-          <a href="#" className="text-white hover:text-orange-400 transition-colors">Ana Sayfa</a>
-          <a href="#" className="hover:text-orange-400 transition-colors">Araçlar</a>
-          <a href="#" className="hover:text-orange-400 transition-colors">Yedek Parça</a>
-          <a href="#" className="hover:text-orange-400 transition-colors">Hakkımızda</a>
-        </div>
-        <div className="flex gap-4 items-center">
-          <a href="#" className="text-sm font-medium hover:text-white transition-colors text-neutral-300 hidden sm:block">Üye Ol</a>
-          <button className="bg-white text-black hover:bg-neutral-200 px-6 py-2 rounded-full font-bold text-sm transition-transform hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(255,255,255,0.1)]">
-            Giriş Yap
-          </button>
-        </div>
-      </nav>
+      <Navbar />
 
       {/* Hero Section */}
       <header className="relative mt-8 max-w-7xl mx-auto px-6 mb-24 flex flex-col items-center text-center animate-fade-in-up delay-100">
@@ -54,13 +37,13 @@ export default async function Home() {
           Türkiye'nin en seçkin otomobil ilan platformu. Yüzlerce premium <b className="text-neutral-200 font-medium">satılık</b> ve <b className="text-neutral-200 font-medium">kiralık</b> araç saniyeler uzağınızda.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-          <button className="bg-orange-600 text-white px-10 py-4 lg:py-4 rounded-full font-bold text-lg hover:bg-orange-500 transition-all hover:shadow-[0_0_30px_rgba(234,88,12,0.3)] hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2">
+          <Link href="/araclar" className="bg-orange-600 text-white px-10 py-4 lg:py-4 rounded-full font-bold text-lg hover:bg-orange-500 transition-all hover:shadow-[0_0_30px_rgba(234,88,12,0.3)] hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2">
             İlanları Gör
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </button>
-          <button className="bg-neutral-900 border border-neutral-700 hover:border-neutral-500 text-white px-10 py-4 lg:py-4 rounded-full font-bold text-lg transition-all hover:bg-neutral-800 flex items-center justify-center gap-2">
+          </Link>
+          <Link href="/aracini-sat" className="bg-neutral-900 border border-neutral-700 hover:border-neutral-500 text-white px-10 py-4 lg:py-4 rounded-full font-bold text-lg transition-all hover:bg-neutral-800 flex items-center justify-center gap-2">
             Aracını Sat
-          </button>
+          </Link>
         </div>
       </header>
 

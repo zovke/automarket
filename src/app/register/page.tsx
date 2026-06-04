@@ -8,6 +8,8 @@ export default function RegisterPage() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -22,7 +24,7 @@ export default function RegisterPage() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, password, firstName, lastName }),
       });
 
       if (res.ok) {
@@ -44,6 +46,28 @@ export default function RegisterPage() {
         <h1 className="text-3xl font-bold text-center text-white mb-6">Kayıt Ol</h1>
         {error && <p className="text-red-500 text-center mb-4">{error}</p>}
         <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-neutral-300 mb-2">Ad</label>
+              <input
+                type="text"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                className="w-full bg-neutral-900 text-white p-3 rounded-lg border border-neutral-700 focus:outline-none focus:border-red-500"
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-neutral-300 mb-2">Soyad</label>
+              <input
+                type="text"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                className="w-full bg-neutral-900 text-white p-3 rounded-lg border border-neutral-700 focus:outline-none focus:border-red-500"
+                required
+              />
+            </div>
+          </div>
           <div>
             <label className="block text-neutral-300 mb-2">Email</label>
             <input
