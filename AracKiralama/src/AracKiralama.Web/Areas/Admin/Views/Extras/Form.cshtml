@@ -31,7 +31,7 @@
             <label asp-for="Icon" class="form-label"></label>
             <div class="input-group">
                 <span class="input-group-text"><i id="iconPreview" class="bi @Model.Icon"></i></span>
-                <input asp-for="Icon" class="form-control" placeholder="bi-shield-check" />
+                <input asp-for="Icon" class="form-control" placeholder="bi-shield-check" data-icon-preview="#iconPreview" />
             </div>
             <div class="form-text">İkon adları: <a href="https://icons.getbootstrap.com" target="_blank" rel="noopener">icons.getbootstrap.com</a></div>
         </div>
@@ -50,7 +50,4 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-    <script>
-        document.getElementById("Icon").addEventListener("input", e => document.getElementById("iconPreview").className = "bi " + e.target.value);
-    </script>
 }

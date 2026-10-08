@@ -63,3 +63,31 @@ function syncThemeIcon() {
 }
 syncThemeIcon();
 document.addEventListener("themechange", syncThemeIcon);
+
+// ---- Bilgi balonları (doluluk takvimindeki bloklar vb.) ----
+// Kullanım: <a title="..." data-bs-toggle="tooltip">
+document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el =>
+    new bootstrap.Tooltip(el, { customClass: "small", placement: "top" }));
+
+// ---- Giriş sayfasındaki demo hesap butonları ----
+// Kullanım: <button data-demo="admin@rota.com"> → e-posta alanını doldurur
+document.querySelectorAll("[data-demo]").forEach(b => b.addEventListener("click", () => {
+    const email = document.getElementById("Email");
+    if (email) email.value = b.dataset.demo;
+    document.getElementById("Password")?.focus();
+}));
+
+// ---- Görsel yüklemeden önce önizleme ----
+// Kullanım: <input type="file" data-image-preview="#preview">
+document.querySelectorAll("[data-image-preview]").forEach(input => input.addEventListener("change", () => {
+    const file = input.files[0];
+    const img = document.querySelector(input.dataset.imagePreview);
+    if (file && img) img.src = URL.createObjectURL(file);
+}));
+
+// ---- İkon adı yazıldıkça önizleme ----
+// Kullanım: <input data-icon-preview="#iconPreview">
+document.querySelectorAll("[data-icon-preview]").forEach(input => input.addEventListener("input", () => {
+    const icon = document.querySelector(input.dataset.iconPreview);
+    if (icon) icon.className = "bi " + input.value;
+}));

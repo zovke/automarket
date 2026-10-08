@@ -1,12 +1,14 @@
+using AracKiralama.Web.Helpers;
+
 namespace AracKiralama.Web.Services;
 
 public interface IImageService
 {
-    /// <summary>Görseli wwwroot/uploads altına kaydeder ve tarayıcıda kullanılacak yolu döndürür.</summary>
+    /// <summary>Görseli DATA_DIR/uploads altına kaydeder ve tarayıcıda kullanılacak yolu ("/uploads/...") döndürür.</summary>
     Task<string> SaveAsync(IFormFile file);
 }
 
-public class ImageService(IWebHostEnvironment env) : IImageService
+public class ImageService(AppPaths paths) : IImageService
 {
     private const long MaxBytes = 5 * 1024 * 1024; // 5 MB
     private static readonly string[] AllowedExtensions = [".jpg", ".jpeg", ".png", ".webp"];
@@ -20,7 +22,8 @@ public class ImageService(IWebHostEnvironment env) : IImageService
         if (!AllowedExtensions.Contains(ext) || !file.ContentType.StartsWith("image/"))
             throw new BusinessRuleException("Sadece JPG, PNG veya WEBP görsel yükleyebilirsiniz.");
 
-        var folder = Path.Combine(env.WebRootPath, "uploads");
+        // DATA_DIR/uploads (bkz. Helpers/AppPaths.cs); Program.cs bu klasörü /uploads adresinden sunar.
+        var folder = paths.UploadsDir;
         Directory.CreateDirectory(folder);
 
         // Kullanıcının verdiği dosya adını kullanmıyoruz; çakışma ve güvenlik riskine karşı rastgele ad.

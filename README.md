@@ -2,6 +2,8 @@
 
 Asıl proje **[`AracKiralama/`](AracKiralama/README.md)** klasöründedir. Detaylı kurulum ve kullanım: **[AracKiralama/README.md](AracKiralama/README.md)**
 
+🌐 **Canlı:** https://automarket.ardcek.com (kısa yol: https://ardcek.com/automarket/) — ücretsiz sunucu uykudaysa ilk açılış 30–60 sn sürer. Yayın adımları: [AracKiralama/README.md → 12. Canlı yayın](AracKiralama/README.md#12-canlı-yayın-internette-yayınlamak)
+
 ## Hızlı başlangıç
 
 [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0) kurun, sonra:

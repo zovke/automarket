@@ -7,6 +7,9 @@ Bu proje bir **araç kiralama firmasının bilgisayar sistemidir**. İki parçad
 
 Her şey **C#** dilinde, **ASP.NET Core MVC** ile yazılmıştır. Veritabanı kurmanıza **gerek yoktur**; program ilk açıldığında kendi veritabanını oluşturur ve içini örnek verilerle doldurur.
 
+> 🌐 **Canlı adres:** **https://automarket.ardcek.com** (kısa yol: https://ardcek.com/automarket/) — admin girişi `admin@rota.com` / `Rota123!`
+> Ücretsiz sunucu 15 dakika kullanılmazsa uyur; ilk açılış 30–60 saniye sürebilir. Ayrıntı: [12. Canlı yayın](#12-canlı-yayın-internette-yayınlamak).
+
 > **Bu dosyayı baştan sona sırayla okuyun.** Hiçbir şey bilmiyor olsanız bile 10 dakika içinde projeyi bilgisayarınızda çalıştırmış olacaksınız.
 
 ---
@@ -24,10 +27,11 @@ Her şey **C#** dilinde, **ASP.NET Core MVC** ile yazılmıştır. Veritabanı k
 9. [API ve Swagger](#9-api-ve-swagger)
 10. [Testleri çalıştırmak](#10-testleri-çalıştırmak)
 11. [Veritabanını sıfırlamak](#11-veritabanını-sıfırlamak)
-12. [Sorun çözme (bir şey çalışmıyorsa)](#12-sorun-çözme-bir-şey-çalışmıyorsa)
-13. [Bir şeyi değiştirmek istiyorum — hangi dosya?](#13-bir-şeyi-değiştirmek-istiyorum--hangi-dosya)
-14. [Proje nasıl çalışıyor? (teknik bilgi)](#14-proje-nasıl-çalışıyor-teknik-bilgi)
-15. [Sözlük — yabancı terimler](#15-sözlük--yabancı-terimler)
+12. [Canlı yayın (internette yayınlamak)](#12-canlı-yayın-internette-yayınlamak)
+13. [Sorun çözme (bir şey çalışmıyorsa)](#13-sorun-çözme-bir-şey-çalışmıyorsa)
+14. [Bir şeyi değiştirmek istiyorum — hangi dosya?](#14-bir-şeyi-değiştirmek-istiyorum--hangi-dosya)
+15. [Proje nasıl çalışıyor? (teknik bilgi)](#15-proje-nasıl-çalışıyor-teknik-bilgi)
+16. [Sözlük — yabancı terimler](#16-sözlük--yabancı-terimler)
 
 ---
 
@@ -137,7 +141,7 @@ Programı çalıştırmak için düzenleyici **şart değildir**; terminal yeter
 
 > 💡 Terminal penceresi açık kaldığı sürece site çalışır. Pencereyi kapatırsanız site de kapanır.
 >
-> 💡 Sunumda internet bağlantısı olsun: ikonlar, yazı tipi ve grafikler internetten yüklenir.
+> 💡 İkonlar, yazı tipi ve grafik kütüphanesi projenin içindedir (`wwwroot/lib`). İlk kurulumdan sonra **internet olmadan da** çalışır.
 
 ### Önemli adresler
 
@@ -407,7 +411,109 @@ Her şeyi ilk haline (örnek verilere) döndürmek için:
 
 ---
 
-## 12. Sorun çözme (bir şey çalışmıyorsa)
+## 12. Canlı yayın (internette yayınlamak)
+
+### 12.1. Neden ardcek.com'un içinde değil de alt alan adında?
+
+`ardcek.com` Hostinger'ın **web hosting** paketinde duruyor. Bu paket sadece **PHP ve HTML** dosyalarını çalıştırabilir; **C# / ASP.NET Core çalıştıramaz.** Bu yüzden:
+
+```
+Ziyaretçi ──► ardcek.com/automarket/  (Hostinger)
+                     │  .htaccess ile otomatik yönlendirme
+                     ▼
+              automarket.ardcek.com   (Render.com — uygulama burada çalışır)
+```
+
+- **Uygulama:** [Render.com](https://render.com) üzerinde, ücretsiz bir **Docker** servisi olarak çalışır. GitHub'daki `main` dalına her `push` yapıldığında **kendiliğinden** yeniden yayınlanır.
+- **Adres:** `automarket.ardcek.com` (alt alan adı, DNS ayarıyla Render'a bağlanır).
+- **ardcek.com/automarket/:** Hostinger'daki bu klasöre konan küçük bir `.htaccess` dosyası gelen herkesi uygulamaya yönlendirir.
+
+### 12.2. Ücretsiz planın bilinmesi gerekenleri
+
+| Durum | Açıklama |
+|---|---|
+| 😴 Uyku | 15 dakika kimse girmezse sunucu uyur. Sonraki ilk açılış **30–60 saniye** sürer, sonra normal hızdadır. **Sunumdan 2 dakika önce siteyi bir kez açın.** |
+| 🔄 Veriler sıfırlanır | Ücretsiz planda kalıcı disk yok. Sunucu her yeniden başladığında (uyku, yeni yayın) veritabanı **örnek verilerle baştan oluşur.** Demo için avantajdır; ama sitede yaptığınız değişiklikler kalıcı değildir. |
+| 🕒 Saat dilimi | Sunucu Türkiye saatiyle çalışır (`TZ=Europe/Istanbul`), "bugün teslim / gecikmiş" listeleri doğru görünür. |
+
+### 12.3. İlk kurulum (bir kere yapılır — yaklaşık 15 dakika)
+
+**Adım 1 — Render'da servisi oluşturun**
+1. https://render.com → **Get Started** → **GitHub ile giriş yapın** (repo'ya erişim izni verin).
+2. Üst menüden **New +** → **Blueprint**.
+3. `zovke/automarket` deposunu seçin → **Connect**.
+4. Render, depodaki `render.yaml` dosyasını okur ve `rota-arac-kiralama` adlı servisi gösterir → **Apply**.
+5. İlk derleme 5–10 dakika sürer. **Logs** sekmesinde `Now listening on: http://[::]:8080` görünce hazırdır.
+6. Servisin geçici adresi `https://rota-arac-kiralama.onrender.com` (veya benzeri) olur; bu adresi açıp çalıştığını kontrol edin.
+
+**Adım 2 — Alt alan adını Render'a bağlayın**
+1. Render → servis → **Settings** → **Custom Domains**. `automarket.ardcek.com` zaten listede görünür (render.yaml ekledi); görünmüyorsa **Add Custom Domain** ile ekleyin.
+2. Render size bir **CNAME hedefi** gösterir (örn. `rota-arac-kiralama.onrender.com`). Kopyalayın.
+3. **hPanel** → **Domainler** → `ardcek.com` → **DNS / Ad Sunucuları** → **DNS kayıtları**:
+   | Tür | Ad (Name) | Hedef (Points to) | TTL |
+   |---|---|---|---|
+   | `CNAME` | `automarket` | `rota-arac-kiralama.onrender.com` (Render'ın verdiği) | varsayılan |
+4. **Kaydet.** Render'a dönüp **Verify**'a basın. DNS'in yayılması birkaç dakika – birkaç saat sürebilir. Doğrulanınca Render **SSL sertifikasını kendisi** oluşturur (https).
+
+**Adım 3 — ardcek.com/automarket/ yönlendirmesini kurun**
+1. **hPanel** → **Dosya Yöneticisi** → `public_html/automarket/` klasörüne girin.
+2. İçindeki eski `index.html` dosyasını silin.
+3. Bu projedeki `AracKiralama/deploy/hostinger-automarket/` klasöründeki **iki dosyayı** yükleyin:
+   - `.htaccess` → gelen herkesi `https://automarket.ardcek.com` adresine yönlendirir.
+   - `index.html` → `.htaccess` çalışmazsa yedek yönlendirme sayfası.
+   > `.htaccess` gizli dosyadır; Dosya Yöneticisi'nde görmüyorsanız sağ üstteki ayarlardan **gizli dosyaları göster**'i açın.
+4. Hostinger önbelleği eski sayfayı ~10 dakika gösterebilir. Hemen görmek isterseniz hPanel → **Performans** → **CDN / Önbellek** → **Önbelleği temizle**.
+
+**Kontrol:** Tarayıcıda `https://ardcek.com/automarket/` açın → `https://automarket.ardcek.com` adresine geçmeli ve site açılmalı.
+
+### 12.4. Güncelleme yayınlamak
+
+Kodda değişiklik yapıp GitHub'a gönderin:
+
+```bash
+git add .
+git commit -m "değişiklik açıklaması"
+git push origin main
+```
+
+Render bunu görür, yeniden derler ve 5–10 dakika içinde canlıya alır. İlerlemeyi Render → servis → **Events / Logs** sekmesinden izleyebilirsiniz.
+
+### 12.5. Yayınla ilgili dosyalar
+
+| Dosya | Görevi |
+|---|---|
+| `render.yaml` (depo kökünde) | Render'a "bu bir Docker web servisi, şu Dockerfile'ı kullan, sağlık kontrolü /health" der |
+| `AracKiralama/Dockerfile` | Uygulamayı derleyip Linux imajı oluşturur (Türkiye saati, PDF için font kütüphanesi dahil) |
+| `AracKiralama/.dockerignore` | İmaja girmemesi gereken dosyalar (bin, obj, veritabanı, testler) |
+| `src/AracKiralama.Web/appsettings.Production.json` | Sunucudaki log ayarları |
+| `src/AracKiralama.Web/Helpers/AppPaths.cs` | Veritabanı ve yüklenen görsellerin klasörü (`DATA_DIR` ortam değişkeni) |
+| `src/AracKiralama.Web/Helpers/SecurityHeaders.cs` | Güvenlik başlıkları (CSP — bkz. aşağı) |
+| `AracKiralama/deploy/hostinger-automarket/` | ardcek.com/automarket yönlendirme dosyaları |
+
+### 12.6. Güvenlik başlıkları (CSP) — hoca sorarsa
+
+Uygulama her sayfaya **Content-Security-Policy** başlığı ekler: tarayıcı sadece bu sitenin kendi script, stil ve yazı tiplerini çalıştırır. Sayfaya dışarıdan zararlı kod sokulsa bile çalışmaz (XSS koruması). Bu yüzden:
+- Projede **hiç inline `<script>`** yoktur; bütün JavaScript `wwwroot/js/` altındaki dosyalardadır.
+- Bootstrap Icons, Inter yazı tipi ve Chart.js **CDN'den değil, projenin içinden** (`wwwroot/lib/`) yüklenir.
+- Grafik verileri, çalıştırılmayan `<script type="application/json">` bloklarıyla sayfaya konur ve `admin-charts.js` tarafından okunur.
+
+Lokalde de aynı başlık geldiği için bu kurallara uymayan bir değişiklik hemen fark edilir (tarayıcı konsolunda "Refused to execute inline script" hatası görürsünüz).
+
+### 12.7. Production modunu bilgisayarınızda denemek
+
+```bash
+dotnet publish src/AracKiralama.Web -c Release -o publish
+cd publish
+```
+Windows PowerShell:
+```powershell
+$env:ASPNETCORE_ENVIRONMENT="Production"; $env:DATA_DIR="$PWD\data"; dotnet AracKiralama.Web.dll --urls http://localhost:5080
+```
+Sonra http://localhost:5080 açın. `http://localhost:5080/health` → `Healthy` yazmalı.
+
+---
+
+## 13. Sorun çözme (bir şey çalışmıyorsa)
 
 | Gördüğünüz | Sebebi | Çözüm |
 |---|---|---|
@@ -417,18 +523,24 @@ Her şeyi ilk haline (örnek verilere) döndürmek için:
 | `address already in use` / `port 5046` hatası | Site zaten başka bir pencerede açık | Diğer terminalde `Ctrl + C` yapın veya o pencereyi kapatın. |
 | `The process cannot access the file ... because it is being used` | Site açıkken `dotnet test` / `dotnet build` yaptınız | Siteyi kapatıp tekrar deneyin. |
 | `Failed to determine the https port for redirect` uyarısı | Normal, zararsız | Görmezden gelin. |
-| İkonlar kare kare, grafikler boş | İnternet yok | İnternete bağlanın (ikon, yazı tipi ve grafik kütüphanesi internetten gelir). |
+| İkonlar kare kare, grafikler boş | Tarayıcı eski dosyaları önbellekte tutuyor | `Ctrl + F5` ile sayfayı yenileyin. |
 | "Bu sayfaya erişim yetkiniz yok" | Müşteri hesabıyla `/Admin`'e girmeye çalıştınız | Çıkış yapıp `admin@rota.com` ile girin. |
 | "E-posta veya şifre hatalı" | Şifre yanlış yazıldı | Şifre: `Rota123!` — büyük **R**, sonda **!**. Klavyenin Türkçe/İngilizce olmasına dikkat. |
 | Rezervasyonda "profil bilgileri eksik" | Doğum / ehliyet tarihi girilmemiş | Hesabım → Profil ve Ehliyet → doldurun. |
 | "Araç seçtiğiniz tarihlerde müsait değil" | Araç o tarihlerde dolu | Başka tarih veya araç seçin (bu bir hata değil, kural). |
 | Butona basınca hiçbir şey olmuyor | Formda eksik / hatalı alan var | Kırmızı yazılan alanları düzeltin. |
 | Veriler karıştı, demo bozuldu | — | [Veritabanını sıfırlayın](#11-veritabanını-sıfırlamak). |
+| **Canlı site** çok yavaş açılıyor / "Service waking up" | Ücretsiz sunucu uykudaydı | 30–60 sn bekleyin; sonra normal hızda çalışır. |
+| **Canlı site** 502 / "Bad Gateway" | Yeni sürüm derleniyor veya uygulama çöktü | Render → servis → **Logs**'a bakın; derleme bitince düzelir. |
+| `automarket.ardcek.com` açılmıyor | DNS kaydı yok / henüz yayılmadı | hPanel'de `CNAME automarket` kaydını kontrol edin; birkaç saat bekleyin. Render'da domain "Verified" olmalı. |
+| "Bağlantınız gizli değil" (SSL) uyarısı | Render sertifikayı henüz üretmedi | Domain doğrulandıktan sonra birkaç dakika bekleyin. |
+| `ardcek.com/automarket/` hâlâ eski sayfayı gösteriyor | Hostinger önbelleği | hPanel'den önbelleği temizleyin; `.htaccess`'in `public_html/automarket/` içinde olduğunu kontrol edin. |
+| Canlıda yaptığım değişiklikler kayboldu | Ücretsiz planda kalıcı disk yok | Normal; sunucu yeniden başlayınca örnek veriler baştan oluşur. |
 | İlk çalıştırmada uzun süre bekliyor | Paketler internetten iniyor | Bekleyin; sadece ilk sefer uzun sürer. |
 
 ---
 
-## 13. Bir şeyi değiştirmek istiyorum — hangi dosya?
+## 14. Bir şeyi değiştirmek istiyorum — hangi dosya?
 
 Bütün yollar `AracKiralama/src/AracKiralama.Web/` klasörüne göredir.
 
@@ -460,7 +572,7 @@ Sunum akışı ve hocanın sorabileceği sorular: **[docs/SUNUM.md](docs/SUNUM.m
 
 ---
 
-## 14. Proje nasıl çalışıyor? (teknik bilgi)
+## 15. Proje nasıl çalışıyor? (teknik bilgi)
 
 ### Kullanılan teknolojiler
 
@@ -470,11 +582,13 @@ Sunum akışı ve hocanın sorabileceği sorular: **[docs/SUNUM.md](docs/SUNUM.m
 | Web | ASP.NET Core MVC (Controller + Razor View), Areas, ViewComponent |
 | Veritabanı | SQLite (tek dosya) + Entity Framework Core 10 (ORM, Migration) |
 | Giriş / yetki | ASP.NET Core Identity — şifreler hash'lenerek saklanır, rol bazlı yetki |
-| Arayüz | Bootstrap 5.3, Bootstrap Icons, Inter yazı tipi, Chart.js |
+| Arayüz | Bootstrap 5.3, Bootstrap Icons, Inter yazı tipi, Chart.js (hepsi projenin içinde, CDN yok) |
 | PDF | QuestPDF (Community lisansı) |
 | Excel | ClosedXML |
 | API | OpenAPI + Swagger UI |
+| Güvenlik | Content-Security-Policy, Data Protection, anti-forgery token, rol bazlı yetki |
 | Test | xUnit + bellekte çalışan SQLite |
+| Yayın | Docker + Render.com (GitHub'dan otomatik), sağlık kontrolü `/health` |
 
 ### Bir istek nasıl işlenir?
 
@@ -503,20 +617,23 @@ View (Razor)        ← sonucu HTML olarak kullanıcıya gösterir      (Views/,
 AracKiralama/
 ├─ AracKiralama.slnx              Çözüm dosyası (Visual Studio ile açılır)
 ├─ README.md                      Bu dosya
+├─ Dockerfile                     Sunucu (Render) için Docker imajı tarifi
 ├─ docs/                          Geliştirici rehberi ve sunum notları
+├─ deploy/hostinger-automarket/   ardcek.com/automarket yönlendirme dosyaları
 ├─ src/AracKiralama.Web/          ← UYGULAMA
 │  ├─ Program.cs                  Başlangıç: servisler, giriş sistemi, veritabanı, adresler
-│  ├─ appsettings.json            Ayarlar (firma bilgisi, fiyat kuralları, veritabanı yolu)
+│  ├─ appsettings.json            Ayarlar (firma bilgisi, fiyat kuralları)
 │  ├─ Models/Entities/            Veritabanı tabloları (Araç, Rezervasyon, Şube, Ödeme...)
 │  ├─ Models/Enums/               Seçenek listeleri (durumlar, yakıt türleri...)
 │  ├─ Data/                       Veritabanı bağlantısı, migration'lar, örnek veriler
 │  ├─ Services/                   İŞ KURALLARI (fiyat, müsaitlik, rezervasyon, rapor, PDF)
 │  ├─ ViewModels/                 Formların veri modelleri ve doğrulama kuralları
 │  ├─ Validation/                 T.C. Kimlik No ve plaka doğrulayıcıları
+│  ├─ Helpers/                    Yardımcılar: para/tarih biçimi, roller, ayarlar, klasörler, güvenlik başlıkları
 │  ├─ Controllers/                Müşteri sayfaları + Api/ (REST API)
 │  ├─ Areas/Admin/                Yönetim paneli (controller + sayfalar)
 │  ├─ Views/                      Müşteri sayfaları + Shared/ (ortak parçalar, menü, kartlar)
-│  └─ wwwroot/                    CSS, JavaScript, araç fotoğrafları
+│  └─ wwwroot/                    CSS, JavaScript, araç fotoğrafları, lib/ (Bootstrap, ikonlar, yazı tipi, Chart.js)
 └─ tests/AracKiralama.Tests/      Otomatik testler (57 adet)
 ```
 
@@ -593,12 +710,12 @@ Fiyatlar rezervasyon anında **kopyalanarak** saklanır: aracın fiyatı sonrada
 ### SQL Server'a geçmek isterseniz (isteğe bağlı)
 1. `Microsoft.EntityFrameworkCore.SqlServer` paketini ekleyin.
 2. `Program.cs` içinde `UseSqlite(...)` yerine `UseSqlServer(...)` yazın.
-3. `appsettings.json` → `ConnectionStrings:Default` değerini SQL Server bağlantı cümlesiyle değiştirin.
+3. `appsettings.json` içine `"ConnectionStrings": { "Default": "<SQL Server bağlantı cümlesi>" }` ekleyin (bu ayar yoksa SQLite dosyası kullanılır).
 4. `Data/Migrations` klasörünü silip `dotnet ef migrations add InitialCreate --project src/AracKiralama.Web --output-dir Data/Migrations` çalıştırın.
 
 ---
 
-## 15. Sözlük — yabancı terimler
+## 16. Sözlük — yabancı terimler
 
 | Terim | Basitçe |
 |---|---|

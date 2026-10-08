@@ -1,0 +1,24 @@
+# Render.com Blueprint — "New → Blueprint" ile bu repo seçildiğinde servis otomatik oluşturulur.
+# Ayrıntılı anlatım: AracKiralama/README.md → "Canlı yayın" bölümü
+services:
+  - type: web
+    name: rota-arac-kiralama
+    runtime: docker
+    plan: free
+    region: frankfurt
+    branch: main
+    dockerfilePath: ./AracKiralama/Dockerfile
+    dockerContext: ./AracKiralama
+    healthCheckPath: /health
+    autoDeploy: true
+    # Sadece C# projesi değişince yeniden yayınla (eski Next.js dosyaları tetiklemesin)
+    buildFilter:
+      paths:
+        - AracKiralama/**
+    domains:
+      - automarket.ardcek.com
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: TZ
+        value: Europe/Istanbul

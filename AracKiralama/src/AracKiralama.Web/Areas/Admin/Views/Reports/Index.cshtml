@@ -77,26 +77,7 @@
 </div>
 
 @section Scripts {
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
-    <script>
-        const branches = @Html.Raw(JsonSerializer.Serialize(r.Branches));
-        let chart;
-        function draw() {
-            chart?.destroy();
-            const s = getComputedStyle(document.documentElement);
-            Chart.defaults.color = s.getPropertyValue("--muted").trim();
-            Chart.defaults.font.family = "Inter, system-ui, sans-serif";
-            chart = new Chart(document.getElementById("branchChart"), {
-                type: "bar",
-                data: { labels: branches.map(b => b.Branch), datasets: [{ data: branches.map(b => b.Revenue), backgroundColor: s.getPropertyValue("--brand").trim(), borderRadius: 6 }] },
-                options: {
-                    indexAxis: "y", maintainAspectRatio: false,
-                    plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => new Intl.NumberFormat("tr-TR").format(c.raw) + " ₺" } } },
-                    scales: { x: { grid: { color: s.getPropertyValue("--border").trim() }, ticks: { callback: v => (v / 1000) + "K" } }, y: { grid: { display: false } } }
-                }
-            });
-        }
-        draw();
-        document.addEventListener("themechange", draw);
-    </script>
+    <script type="application/json" id="chart-data">@Html.Raw(JsonSerializer.Serialize(new { branches = r.Branches }))</script>
+    <script src="~/lib/chartjs/chart.umd.min.js"></script>
+    <script src="~/js/admin-charts.js" asp-append-version="true"></script>
 }

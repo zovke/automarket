@@ -1,0 +1,5 @@
+# ardcek.com/automarket/... adresine gelen herkesi uygulamaya yönlendirir.
+# Bu dosya Hostinger'da public_html/automarket/ klasörüne yüklenir.
+# 302 = geçici yönlendirme (adres ileride değişirse tarayıcılar eskisini hatırlamaz).
+RewriteEngine On
+RewriteRule ^(.*)$ https://automarket.ardcek.com/$1 [R=302,L,QSA]

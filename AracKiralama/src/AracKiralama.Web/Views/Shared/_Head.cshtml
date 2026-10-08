@@ -1,20 +1,12 @@
-@* Hem site hem yönetim paneli layout'unda kullanılan ortak <head> içeriği. *@
+@* Hem site hem yönetim paneli layout'unda kullanılan ortak <head> içeriği.
+   Bütün dosyalar yereldir (wwwroot/lib) → internet olmadan da çalışır ve CSP'ye takılmaz. *@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>@(ViewData["Title"] is string t ? $"{t} · {Site.Value.Name}" : $"{Site.Value.Name} {Site.Value.Tagline}")</title>
-<script>
-    // Tema tercihini sayfa çizilmeden önce uygula (yanıp sönmeyi engeller)
-    (function () {
-        let t = null;
-        try { t = localStorage.getItem("theme"); } catch { }
-        if (!t) t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-        document.documentElement.setAttribute("data-bs-theme", t);
-    })();
-</script>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+@* Tema tercihini sayfa çizilmeden önce uygular (yanıp sönmeyi engeller); bu yüzden defer/async YOK. *@
+<script src="~/js/theme-init.js" asp-append-version="true"></script>
+<link rel="stylesheet" href="~/lib/inter/inter.css" />
+<link rel="stylesheet" href="~/lib/bootstrap-icons/bootstrap-icons.min.css" />
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%232747d6'/><text x='16' y='22' font-size='16' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'>R</text></svg>" />

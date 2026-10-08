@@ -13,13 +13,13 @@
 </div>
 
 <div class="card table-card">
-    <form method="get" class="card-header d-flex flex-wrap gap-2 align-items-center">
+    <form method="get" class="card-header d-flex flex-wrap gap-2 align-items-center" data-auto-submit>
         <div class="input-group" style="max-width:340px">
             <span class="input-group-text"><i class="bi bi-search"></i></span>
             <input type="search" name="q" value="@q" class="form-control" placeholder="Ad, e-posta veya telefon" />
         </div>
         <div class="form-check form-switch ms-2">
-            <input class="form-check-input" type="checkbox" role="switch" id="bl" name="blacklisted" value="true" checked="@blacklisted" onchange="this.form.requestSubmit()" />
+            <input class="form-check-input" type="checkbox" role="switch" id="bl" name="blacklisted" value="true" checked="@blacklisted" />
             <label class="form-check-label small" for="bl">Sadece kara liste</label>
         </div>
         <button class="btn btn-ghost">Ara</button>

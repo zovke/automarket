@@ -6,8 +6,11 @@ using AracKiralama.Web.Data;
 using AracKiralama.Web.Helpers;
 using AracKiralama.Web.Models.Entities;
 using AracKiralama.Web.Services;
+using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,10 +18,31 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<PricingOptions>(builder.Configuration.GetSection("Pricing"));
 builder.Services.Configure<SiteOptions>(builder.Configuration.GetSection("Site"));
 
+// ---------- Klasörler ----------
+// Veritabanı, yüklenen görseller ve oturum anahtarları DATA_DIR klasörüne yazılır (yoksa proje klasörü).
+var paths = new AppPaths(builder.Environment.ContentRootPath);
+builder.Services.AddSingleton(paths);
+
+// Oturum (cookie) şifreleme anahtarları diske yazılır → uygulama yeniden başlayınca kullanıcılar çıkış yapmış olmaz.
+builder.Services.AddDataProtection().PersistKeysToFileSystem(new DirectoryInfo(paths.KeysDir));
+
 // ---------- Veritabanı ----------
+// Varsayılan: DATA_DIR/arackiralama.db (SQLite). İsterseniz appsettings.json'a "ConnectionStrings:Default" ekleyin.
 // SQL Server'a geçmek için: UseSqlite → UseSqlServer ve connection string'i değiştirin.
-builder.Services.AddDbContext<AppDbContext>(o =>
-    o.UseSqlite(builder.Configuration.GetConnectionString("Default")));
+var connectionString = builder.Configuration.GetConnectionString("Default") ?? $"Data Source={paths.DatabaseFile}";
+builder.Services.AddDbContext<AppDbContext>(o => o.UseSqlite(connectionString));
+
+// ---------- Sunucu arkasında çalışma (Render, Nginx...) ----------
+// HTTPS önde (proxy'de) sonlanır; gerçek protokol ve IP bilgisi X-Forwarded-* başlıklarıyla gelir.
+builder.Services.Configure<ForwardedHeadersOptions>(o =>
+{
+    o.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+    o.KnownIPNetworks.Clear();
+    o.KnownProxies.Clear();
+});
+
+// Render'ın "uygulama ayakta mı?" kontrolü için: GET /health
+builder.Services.AddHealthChecks();
 
 // ---------- Kimlik doğrulama (ASP.NET Core Identity) ----------
 builder.Services
@@ -74,6 +98,9 @@ using (var scope = app.Services.CreateScope())
     await DbSeeder.SeedAsync(scope.ServiceProvider);
 }
 
+app.UseForwardedHeaders();   // en başta olmalı
+app.UseSecurityHeaders();    // Helpers/SecurityHeaders.cs
+
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -82,13 +109,20 @@ if (!app.Environment.IsDevelopment())
 app.UseStatusCodePagesWithReExecute("/Home/StatusCode", "?code={0}");
 
 app.UseHttpsRedirection();
-app.UseStaticFiles(); // wwwroot/uploads altına sonradan yüklenen görseller için
+
+// Admin panelinden yüklenen araç görselleri: DATA_DIR/uploads → /uploads/...
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(paths.UploadsDir),
+    RequestPath = "/uploads",
+});
 app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();
+app.MapHealthChecks("/health");
 
 // API dokümantasyonu: /openapi/v1.json  ve arayüz: /swagger
 app.MapOpenApi();

@@ -1,5 +1,7 @@
 # Sunum Notları (≈ 10 dakika)
 
+> **Sunumdan 2 dakika önce** https://automarket.ardcek.com adresini bir kez açın (ücretsiz sunucu uykudan uyansın). İnternet yoksa yerelde `dotnet run` ile çalıştırın; hiçbir dosya internetten yüklenmez.
+
 ## Açılış (1 dk)
 "Araç kiralama firmasının hem müşteri sitesini hem de şube personelinin kullandığı otomasyonu C# ile geliştirdik. Asıl odağımız gerçek iş kuralları: aynı araç aynı tarihte iki kişiye verilemez, fiyat otomatik hesaplanır, geç iade ve eksik yakıt otomatik ücretlendirilir."
 
@@ -37,6 +39,8 @@
 | Yetkilendirme nasıl? | Rol bazlı: `[Authorize(Roles = "Admin,Personel")]`. Müşteri `/Admin`'e girerse "Erişim engellendi". Personel, "Personel & Roller" sayfasını göremez. |
 | Neden servis katmanı? | Kurallar tek yerde, controller'dan bağımsız → test edilebilir. Aynı servis hem MVC sayfaları hem API tarafından kullanılıyor. |
 | Gecikmeler nasıl tespit ediliyor? | `OverdueReservationWorker` (BackgroundService) saatte bir çalışır, iade tarihi geçmiş kiralamaları işaretler. |
+| Nerede yayında, nasıl? | Docker imajı olarak Render.com'da; GitHub'a push edince otomatik yayınlanır. Hostinger paketi C# çalıştıramadığı için ardcek.com/automarket alt alan adına yönlendirir. |
+| Güvenlik başlıkları? | Her sayfada Content-Security-Policy: sadece kendi script'lerimiz çalışır, inline script ve dış CDN yok (XSS koruması). `Helpers/SecurityHeaders.cs`. |
 | T.C. kimlik doğrulaması? | `Validation/TcKimlikNo.cs` — resmi algoritma (10. ve 11. hane kontrolü). |
 
 ## Ekip iş bölümü (öneri)

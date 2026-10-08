@@ -25,13 +25,13 @@
 </ul>
 
 <div class="card table-card">
-    <form method="get" class="card-header d-flex flex-wrap gap-2 align-items-center">
+    <form method="get" class="card-header d-flex flex-wrap gap-2 align-items-center" data-auto-submit>
         <input type="hidden" name="Status" value="@f.Status" />
         <div class="input-group" style="max-width:340px">
             <span class="input-group-text"><i class="bi bi-search"></i></span>
             <input type="search" name="Q" value="@f.Q" class="form-control" placeholder="Kod, plaka, müşteri adı / e-posta" />
         </div>
-        <select name="BranchId" class="form-select" style="width:auto" onchange="this.form.requestSubmit()">
+        <select name="BranchId" class="form-select" style="width:auto">
             <option value="">Tüm şubeler</option>
             @foreach (var b in Model.Branches) { <option value="@b.Id" selected="@(f.BranchId == b.Id)">@b.Name</option> }
         </select>

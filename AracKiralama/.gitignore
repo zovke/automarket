@@ -15,3 +15,8 @@ TestResults/
 
 # Yüklenen araç görselleri
 src/AracKiralama.Web/wwwroot/uploads/
+src/AracKiralama.Web/uploads/
+src/AracKiralama.Web/keys/
+
+# dotnet publish çıktısı (README 12.7)
+publish/

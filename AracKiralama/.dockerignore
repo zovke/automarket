@@ -1,0 +1,13 @@
+**/bin/
+**/obj/
+**/*.db
+**/*.db-shm
+**/*.db-wal
+**/uploads/
+**/keys/
+tests/
+docs/
+deploy/
+.vs/
+.vscode/
+*.user

@@ -117,3 +117,5 @@ public void Hafta_sonu_alista_yuzde_15_zam()
 - Formlar için ayrı ViewModel; basit tanım tabloları (Şube, Ekstra) entity'yi doğrudan kullanabilir.
 - Enum'a yeni değer eklerken `[Display(Name = "...")]` vermeyi unutmayın.
 - Her yeni iş kuralı için en az bir test.
+- **View içine `<script>...</script>` veya `onclick="..."` yazmayın.** Güvenlik politikası (CSP) bunları engeller. JavaScript'i `wwwroot/js/` altına koyup `<script src="~/js/...">` ile ekleyin; tekrar kullanılan davranışlar için `site.js`'teki `data-*` kalıplarını (`data-confirm`, `data-auto-submit`, `data-image-preview`...) kullanın.
+- Yeni bir kütüphane CDN'den değil, `wwwroot/lib/` altına indirilerek eklenir.

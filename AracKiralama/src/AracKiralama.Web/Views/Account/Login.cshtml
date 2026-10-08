@@ -47,10 +47,4 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-    <script>
-        document.querySelectorAll("[data-demo]").forEach(b => b.addEventListener("click", () => {
-            document.getElementById("Email").value = b.dataset.demo;
-            document.getElementById("Password").focus();
-        }));
-    </script>
 }
