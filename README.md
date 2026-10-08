@@ -1,5 +1,32 @@
-> **Yeni sürüm:** Araç kiralama otomasyonunun C# (ASP.NET Core MVC) sürümü [`AracKiralama/`](AracKiralama/README.md) klasöründedir.
-> Aşağıdaki içerik eski Next.js projesine aittir ve referans olarak tutulmaktadır.
+# 🚗 Rota Rent a Car — Araç Kiralama Otomasyonu (C#)
+
+Asıl proje **[`AracKiralama/`](AracKiralama/README.md)** klasöründedir. Detaylı kurulum ve kullanım: **[AracKiralama/README.md](AracKiralama/README.md)**
+
+## Hızlı başlangıç
+
+[.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0) kurun, sonra:
+
+```bash
+cd AracKiralama
+dotnet run --project src/AracKiralama.Web
+```
+
+Tarayıcıda **http://localhost:5046** açın. Yönetim paneli: **http://localhost:5046/Admin**
+
+## 🔑 Demo hesaplar (hepsinin şifresi: `Rota123!`)
+
+| Rol | E-posta | Şifre |
+|---|---|---|
+| 👑 Admin (yönetim paneli, her şey) | `admin@rota.com` | `Rota123!` |
+| 🧑‍💼 Personel (yönetim paneli) | `personel@rota.com` | `Rota123!` |
+| 🙂 Müşteri | `musteri@rota.com` | `Rota123!` |
+| 🧒 Genç müşteri (20 yaş, lüks araç kiralayamaz) | `genc@rota.com` | `Rota123!` |
+
+Hesaplar programın ilk açılışında otomatik oluşturulur (`AracKiralama/src/AracKiralama.Web/Data/DbSeeder.cs`).
+
+---
+
+> Aşağıdaki içerik eski Next.js projesine aittir ve sadece referans olarak tutulmaktadır.
 
 # Auto Marketplace
 
