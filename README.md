@@ -1,3 +1,6 @@
+> **Yeni sürüm:** Araç kiralama otomasyonunun C# (ASP.NET Core MVC) sürümü [`AracKiralama/`](AracKiralama/README.md) klasöründedir.
+> Aşağıdaki içerik eski Next.js projesine aittir ve referans olarak tutulmaktadır.
+
 # Auto Marketplace
 
 Türkiye'nin modern, dinamik ve yenilikçi araç & yedek parça ilan platformu. Yüzlerce aracı saniyeler uzaklığınızda buluşturan, yüksek performanslı ve tam yığın (full-stack) Next.js uygulamasıdır.

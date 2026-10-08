@@ -1,0 +1,17 @@
+# .NET derleme çıktıları
+bin/
+obj/
+*.user
+*.suo
+.vs/
+.vscode/
+.idea/
+TestResults/
+
+# Yerel SQLite veritabanı (ilk çalıştırmada otomatik oluşur)
+*.db
+*.db-shm
+*.db-wal
+
+# Yüklenen araç görselleri
+src/AracKiralama.Web/wwwroot/uploads/
